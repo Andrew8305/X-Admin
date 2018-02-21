@@ -35,7 +35,7 @@ public class AuthValidAspect {
     @Pointcut("execution(* com.leaf.xadmin.controller..*.*(..))")
     private void allowValidAspect() {}
 
-    @Pointcut("!execution(* com.leaf.xadmin.controller.ErrorController.*(..)) && !execution(* com.leaf.xadmin.controller.UserController.login(..))")
+    @Pointcut("!execution(* com.leaf.xadmin.controller.ErrorController.*(..)) && !execution(* com.leaf.xadmin.controller.UserController.login(..)) && !execution(* com.leaf.xadmin.controller.AdminController.login(..))")
     private void denyValidAspect() {}
 
     @Pointcut("allowValidAspect() && denyValidAspect()")
