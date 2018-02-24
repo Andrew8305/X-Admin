@@ -2,6 +2,7 @@ package com.leaf.xadmin.controller;
 
 import com.leaf.xadmin.entity.Admin;
 import com.leaf.xadmin.entity.Resource;
+import com.leaf.xadmin.vo.dto.AdminInfoDTO;
 import com.leaf.xadmin.vo.enums.LoginType;
 import com.leaf.xadmin.service.IAdminService;
 import com.leaf.xadmin.service.IResourceService;
@@ -42,10 +43,8 @@ public class AdminController {
 
     @Autowired
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
-
     @Autowired
     private RequestResolveUtil requestResolveUtil;
-
     @Autowired
     private IAdminService adminService;
     @Autowired
@@ -58,7 +57,10 @@ public class AdminController {
         if (!subject.isAuthenticated()) {
             ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.ADMIN.getType());
             subject.login(token);
-            return ResponseResultUtil.success(Boolean.TRUE);
+            Admin admin = adminService.queryOne(name);
+            AdminInfoDTO adminInfoDTO = AdminInfoDTO.builder().build();
+            BeanUtils.copyProperties(admin, adminInfoDTO);
+            return ResponseResultUtil.success(adminInfoDTO);
         } else {
             // 退出，重新登录
             logout();
