@@ -95,21 +95,21 @@ public class ErrorController extends AbstractErrorController {
     @ApiOperation(value = "用户未登陆")
     @ExceptionHandler({UnauthenticatedException.class})
     @GetMapping("authen")
-    public ResponseResultVO unauthenticatedException(UnauthenticatedException e) {
+    public ResponseResultVO unauthenticatedException(Exception e) {
         return ResponseResultUtil.fail(ErrorStatus.AUTHEN_LACK_ERROR, e.getClass().getName());
     }
 
     @ApiOperation(value = "用户名或密码错误")
     @ExceptionHandler({UnknownAccountException.class, IncorrectCredentialsException.class})
     @GetMapping("login")
-    public ResponseResultVO unknownAccountException(UnknownAccountException e) {
+    public ResponseResultVO unknownAccountException(Exception e) {
         return ResponseResultUtil.fail(ErrorStatus.LOGIN_FAIL_ERROR, e.getClass().getName());
     }
 
     @ApiOperation(value = "尚未授权，无法操作")
     @ExceptionHandler({UnauthorizedException.class})
     @GetMapping("author")
-    public ResponseResultVO unauthorizedException(UnauthorizedException e) {
+    public ResponseResultVO unauthorizedException(Exception e) {
         return ResponseResultUtil.fail(ErrorStatus.AUTHOR_LACK_ERROR, e.getClass().getName());
     }
 
@@ -126,7 +126,6 @@ public class ErrorController extends AbstractErrorController {
     @ExceptionHandler({MissingServletRequestParameterException.class})
     @GetMapping("miss_params")
     public ResponseResultVO missingServletRequestParameterException(MissingServletRequestParameterException e) {
-
         return ResponseResultUtil.fail(ErrorStatus.MISS_PARAM_ERROR, e.getClass().getName(), e.getParameterName());
     }
 
