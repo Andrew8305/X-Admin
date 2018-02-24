@@ -22,10 +22,10 @@ public class ExtendedModularRealmAuthenticator extends ModularRealmAuthenticator
             throws AuthenticationException {
         // 判断getRealms()是否返回为空
         assertRealmsConfigured();
-        // 强制转换回自定义的CustomizedToken
-        ExtendedUsernamePasswordToken customizedToken = (ExtendedUsernamePasswordToken) authenticationToken;
+        // 强制转换回自定义的ExtendedUsernamePasswordToke
+        ExtendedUsernamePasswordToken extendedToken = (ExtendedUsernamePasswordToken) authenticationToken;
         // 登录类型
-        String loginType = customizedToken.getLoginType();
+        String loginType = extendedToken.getLoginType();
         // 所有Realm
         Collection<Realm> realms = getRealms();
         // 登录类型对应的所有Realm
@@ -37,11 +37,10 @@ public class ExtendedModularRealmAuthenticator extends ModularRealmAuthenticator
         }
 
         // 判断是单Realm还是多Realm
-        if (typeRealms.size() == 1)
-            return doSingleRealmAuthentication(typeRealms.iterator().next(), customizedToken);
-        else {
-            return doMultiRealmAuthentication(typeRealms, customizedToken);
+        if (typeRealms.size() == 1) {
+            return doSingleRealmAuthentication(typeRealms.iterator().next(), extendedToken);
+        } else {
+            return doMultiRealmAuthentication(typeRealms, extendedToken);
         }
-
     }
 }
