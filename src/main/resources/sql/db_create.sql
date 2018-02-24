@@ -61,13 +61,21 @@ CREATE TABLE role (
   UNIQUE INDEX uniq_name(name)
 ) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='角色表';
 
--- 用户/管理员角色表(关联表)
-DROP TABLE user_admin_role;
-CREATE TABLE user_admin_role (
-  `user_admin_id` VARCHAR(32) NOT NULL COMMENT '用户/管理员id',
+-- 用户角色表(关联表)
+DROP TABLE user_role;
+CREATE TABLE user_role (
+  `user_id` VARCHAR(32) NOT NULL COMMENT '用户id',
   `role_id` BIGINT NOT NULL COMMENT '角色id',
-  PRIMARY KEY (user_admin_id, role_id)
-) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='用户/管理员角色表';
+  PRIMARY KEY (user_id, role_id)
+) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='用户角色表';
+
+-- 管理员角色表(关联表)
+DROP TABLE admin_role;
+CREATE TABLE admin_role (
+  `admin_id` VARCHAR(32) NOT NULL COMMENT '管理员id',
+  `role_id` BIGINT NOT NULL COMMENT '角色id',
+  PRIMARY KEY (admin_id, role_id)
+) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='管理员角色表';
 
 -- 权限表
 DROP TABLE permission;
