@@ -26,7 +26,7 @@ public class User {
     private String pass;
     private Integer status;
     private Integer type;
-    private Timestamp lastLoginTime;
+    private Date lastLoginTime;
     private String lastLoginIp;
     private String lastLoginLocal;
     private Date createTime;

@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -30,7 +29,7 @@ public class Admin {
     private String desc;
     private Integer type;
     private Integer status;
-    private Timestamp lastLoginTime;
+    private Date lastLoginTime;
     private String lastLoginIp;
     private String lastLoginLocal;
     private Date createTime;
