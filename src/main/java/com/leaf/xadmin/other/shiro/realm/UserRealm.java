@@ -19,8 +19,12 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 自定义用户权限域 UserRealm
@@ -47,6 +51,17 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        Iterator<String> iterator = principalCollection.getRealmNames().iterator();
+        boolean contains = false;
+        while (iterator.hasNext()) {
+            contains = iterator.next().contains(this.getClass().getName());
+            if (contains) {
+                break;
+            }
+        }
+        if (principalCollection.isEmpty() || !contains) {
+            return null;
+        }
         // 获取登录用户名
         String name = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();

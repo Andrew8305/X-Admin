@@ -98,10 +98,9 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-
         // 自定义realm认证器(必须放在前面)
         securityManager.setAuthenticator(modularRealmAuthenticator());
-        // 设置realm
+        // 设置多个realm
         securityManager.setRealms(realmCollection());
         // redis自定义缓存实现
         securityManager.setCacheManager(redisCacheManager());
@@ -129,7 +128,7 @@ public class ShiroConfig {
      *
      * @return
      */
-    public Collection<Realm> realmCollection() {
+    private Collection<Realm> realmCollection() {
         List<Realm> collection = new ArrayList<>();
         // 用户身份realm认证
         collection.add(userRealm());
