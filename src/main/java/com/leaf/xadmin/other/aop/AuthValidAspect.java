@@ -4,7 +4,7 @@ import com.leaf.xadmin.entity.Permission;
 import com.leaf.xadmin.entity.Resource;
 import com.leaf.xadmin.entity.Role;
 import com.leaf.xadmin.service.IResourceService;
-import com.leaf.xadmin.utils.request.RequestResolveUtil;
+import com.leaf.xadmin.utils.request.RequestMappingResolveUtil;
 import com.leaf.xadmin.vo.RequestResourceVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -15,7 +15,6 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -27,8 +26,7 @@ import java.util.Set;
  * <p>date: 2018-01-21 18:23</p>
  * <p>version: 1.0</p>
  */
-@Component
-@Aspect
+
 @Slf4j
 public class AuthValidAspect {
 
@@ -45,7 +43,7 @@ public class AuthValidAspect {
     private IResourceService resourceService;
 
     @Autowired
-    private RequestResolveUtil requestResolveUtil;
+    private RequestMappingResolveUtil requestMappingResolveUtil;
 
 
     /**
@@ -93,8 +91,8 @@ public class AuthValidAspect {
         Method currentMethod = jp.getTarget().getClass().getMethod(msig.getName(), msig.getParameterTypes());
 
         // 获取请求路径相关权限信息
-        List<RequestResourceVO> requestResourceVOS = requestResolveUtil.methodResolver(currentMethod);
-        Resource resource = RequestResolveUtil.pathMergeUpgrade(requestResourceVOS);
+        List<RequestResourceVO> requestResourceVOS = requestMappingResolveUtil.methodResolver(currentMethod);
+        Resource resource = RequestMappingResolveUtil.pathMergeUpgrade(requestResourceVOS);
         Set<Role> roles = resourceService.queryRolesByPath(resource.getPath());
         Set<Permission> permissions = resourceService.queryPermissionsByPath(resource.getPath());
         Subject subject = SecurityUtils.getSubject();
