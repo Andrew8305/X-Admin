@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  */
 @Component
 @Slf4j
-public class RequestResolveUtil {
+public class RequestMappingResolveUtil {
     private List<Class> clazzs = Lists.newArrayList(RequestMapping.class, PostMapping.class, GetMapping.class, PutMapping.class, DeleteMapping.class);
 
     /**
@@ -106,7 +106,7 @@ public class RequestResolveUtil {
                         .parentPath(parentPath)
                         .childPath(childPath)
                         .type(type)
-                        .name(method.getName())
+                        .name(method.getDeclaringClass().getName() + "." + method.getName())
                         .desc(desc).build();
                 resourceList.add(resource);
             }

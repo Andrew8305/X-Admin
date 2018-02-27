@@ -1,7 +1,6 @@
 package com.leaf.xadmin.utils.request;
 
 import com.leaf.xadmin.controller.UserController;
-import com.leaf.xadmin.utils.request.RequestResolveUtil;
 import com.leaf.xadmin.vo.RequestResourceVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -15,10 +14,10 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
-public class RequestResolveUtilTest {
+public class RequestMappingResolveUtilTest {
 
     @Autowired
-    private RequestResolveUtil resolveUtil;
+    private RequestMappingResolveUtil resolveUtil;
 
     @Test
     public void methodResolver() throws Exception {
@@ -29,7 +28,7 @@ public class RequestResolveUtilTest {
     public void pathMerge() throws Exception {
         List<RequestResourceVO> resourceList = resolveUtil.methodResolver(UserController.class.getMethod("getUser", String.class));
         RequestResourceVO requestResourceVO = resourceList.get(0);
-        String pathMerge = RequestResolveUtil.pathMerge(requestResourceVO.getParentPath(), requestResourceVO.getChildPath());
+        String pathMerge = RequestMappingResolveUtil.pathMerge(requestResourceVO.getParentPath(), requestResourceVO.getChildPath());
         log.debug(pathMerge);
     }
 
