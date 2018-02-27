@@ -176,7 +176,7 @@ CREATE TABLE user_log (
 DROP TABLE resource;
 CREATE TABLE resource (
   `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(32) COMMENT '资源名',
+  `name` VARCHAR(64) COMMENT '资源名',
   `desc` VARCHAR(64) COMMENT '资源描述',
   `path` VARCHAR(64) COMMENT '请求资源路径',
   `type` TINYINT NOT NULL DEFAULT 1 COMMENT '资源类型',

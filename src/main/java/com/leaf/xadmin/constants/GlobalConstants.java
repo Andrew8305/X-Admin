@@ -26,4 +26,6 @@ public class GlobalConstants {
     public final static String SESSION_FORCE_LOGOUT_KEY = "SESSION_FORCE_LOGOUT_KEY";
     public final static String SESSION_FLUSH_AUTHOR_KEY = "SESSION_FLUSH_AUTHOR_KEY";
     public final static String SESSION_VERIFY_PICTURE_KEY = "SESSION_VERIFY_PICTURE_KEY";
+
+    public final static String[] REQUEST_PATH_PATTERN_MATH = {"/user/*", "/admin/*", "/job/*", "/verify/*"};
 }

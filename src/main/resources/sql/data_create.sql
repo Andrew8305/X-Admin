@@ -60,7 +60,8 @@ VALUES
   (2, 'getUser', '获取指定id用户信息', '/user/getUser/{id}', 2),
   (3, 'logout', '用户退出', '/user/logout', 1),
   (4, 'login', '管理员登录', '/admin/login', 1),
-  (5, 'logout', '管理员退出', '/admin/logout', 1);
+  (5, 'logout', '管理员退出', '/admin/logout', 1),
+  (6, 'scanAllResources', '持久化资源列表', '/admin/scanAllResources', 1);
 
 -- resource_perm测试数据
 TRUNCATE TABLE resource_perm;
@@ -71,7 +72,8 @@ VALUES
   (2, 2),
   (3, 2),
   (4, 2),
-  (5, 2);
+  (5, 2),
+  (6, 2);
 
 -- admin测试数据
 TRUNCATE TABLE admin;

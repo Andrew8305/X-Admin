@@ -1,5 +1,6 @@
 package com.leaf.xadmin.controller;
 
+import com.leaf.xadmin.constants.GlobalConstants;
 import com.leaf.xadmin.entity.Admin;
 import com.leaf.xadmin.entity.Resource;
 import com.leaf.xadmin.vo.dto.AdminInfoDTO;
@@ -7,7 +8,7 @@ import com.leaf.xadmin.vo.enums.LoginType;
 import com.leaf.xadmin.service.IAdminService;
 import com.leaf.xadmin.service.IResourceService;
 import com.leaf.xadmin.other.shiro.token.ExtendedUsernamePasswordToken;
-import com.leaf.xadmin.utils.request.RequestResolveUtil;
+import com.leaf.xadmin.utils.request.RequestMappingResolveUtil;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;
 import com.leaf.xadmin.vo.RequestResourceVO;
 import com.leaf.xadmin.vo.ResponseResultVO;
@@ -19,15 +20,14 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.PatternMatchUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author leaf
@@ -44,7 +44,7 @@ public class AdminController {
     @Autowired
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
     @Autowired
-    private RequestResolveUtil requestResolveUtil;
+    private RequestMappingResolveUtil requestMappingResolveUtil;
     @Autowired
     private IAdminService adminService;
     @Autowired
@@ -108,12 +108,16 @@ public class AdminController {
         List<Resource> resourceList = new ArrayList<>();
         Map<RequestMappingInfo, HandlerMethod> map = requestMappingHandlerMapping.getHandlerMethods();
         for (Map.Entry<RequestMappingInfo, HandlerMethod> m : map.entrySet()) {
-            HandlerMethod method = m.getValue();
-            List<RequestResourceVO> requestResourceVOS = requestResolveUtil.methodResolver(method.getMethod());
-            Resource resource = RequestResolveUtil.pathMergeUpgrade(requestResourceVOS);
-            resourceList.add(resource);
+            for (String next : m.getKey().getPatternsCondition().getPatterns()) {
+                if (PatternMatchUtils.simpleMatch(GlobalConstants.REQUEST_PATH_PATTERN_MATH, next)) {
+                    HandlerMethod method = m.getValue();
+                    List<RequestResourceVO> requestResourceVOS = requestMappingResolveUtil.methodResolver(method.getMethod());
+                    Resource resource = RequestMappingResolveUtil.pathMergeUpgrade(requestResourceVOS);
+                    resourceList.add(resource);
+                }
+            }
         }
 
-        return ResponseResultUtil.success(resourceService.addOrUpdateBatch(resourceList));
+        return ResponseResultUtil.success(resourceService.addBatch(resourceList));
     }
 }
