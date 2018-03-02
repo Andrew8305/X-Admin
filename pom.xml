@@ -100,12 +100,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- mybatis-plus相关配置 -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatisplus-spring-boot-starter</artifactId>
-            <version>${mybatisplus-spring-boot-starter.version}</version>
-        </dependency>
+        <!-- mybatis-plus配置 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
@@ -193,7 +188,6 @@
             <artifactId>quartz</artifactId>
             <version>${quartz.version}</version>
         </dependency>
-
 
     </dependencies>
 

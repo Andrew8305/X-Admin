@@ -1,50 +1,38 @@
 package com.leaf.xadmin.config;
 
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
+import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
+import lombok.Data;
+import org.springframework.aop.Advisor;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.springframework.aop.support.JdkRegexpMethodPointcut;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import javax.sql.DataSource;
 
 /**
- * 数据源配置
+ * druid监控配置
  *
  * @author leaf
- * <p>date: 2017-12-30 4:59</p>
+ * <p>date: 2018-02-28 16:24</p>
+ * <p>version: 1.0</p>
  */
 @Configuration
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+@PropertySource(value = {"classpath:druid/druid.properties"})
 @ConfigurationProperties(prefix = "druid")
-@PropertySource("classpath:druid/druid.properties")
-public class DataSourceConfig {
-    @Setter @Getter private String allow;
-    @Setter @Getter private String deny;
-    @Setter @Getter private String username;
-    @Setter @Getter private String password;
-    @Setter @Getter private String reset;
-
-    /**
-     * 数据源参数配置
-     *
-     * @param environment
-     * @return
-     */
-    @Bean
-    public DataSource dataSource(Environment environment) {
-        return DruidDataSourceBuilder
-                .create()
-                .build(environment, "spring.datasource.druid.");
-    }
+@Data
+public class DruidMonitorConfig {
+    private String allow;
+    private String deny;
+    private String username;
+    private String password;
+    private String reset;
 
     /**
      * 访问地址: http://localhost:8080/xadmin/druid/index.html
@@ -79,7 +67,33 @@ public class DataSourceConfig {
         // 添加过滤规则
         bean.addUrlPatterns("/*");
         // 添加不需要忽略的格式信息
-        bean.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        bean.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/datasource/*");
         return bean;
+    }
+
+    /**
+     * Spring监听:
+     *    1.定义拦截器
+     *    2.定义切入点
+     *    3.定义通知类
+     *
+     * @return
+     */
+    @Bean
+    public DruidStatInterceptor druidStatInterceptor() {
+        return new DruidStatInterceptor();
+    }
+
+    @Bean
+    public JdkRegexpMethodPointcut druidStatPointcut() {
+        JdkRegexpMethodPointcut druidStatPointcut = new JdkRegexpMethodPointcut();
+        String patterns = "com.leaf.xadmin*";
+        druidStatPointcut.setPatterns(patterns);
+        return druidStatPointcut;
+    }
+
+    @Bean
+    public Advisor druidStatAdvisor() {
+        return new DefaultPointcutAdvisor(druidStatPointcut(), druidStatInterceptor());
     }
 }

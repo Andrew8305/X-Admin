@@ -1,9 +1,10 @@
 package com.leaf.xadmin;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -17,12 +18,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * <p>version: 1.0</p>
  */
 @SpringBootApplication
-@EnableTransactionManagement
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @EnableScheduling
 @EnableCaching
 @EnableWebMvc
 @EnableSwagger2
-@EnableConfigurationProperties
 public class AdminApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
