@@ -1,4 +1,4 @@
-package com.leaf.xadmin.other.shiro.filter;
+package com.leaf.xadmin.common.shiro.filter;
 
 import com.leaf.xadmin.constants.GlobalConstants;
 import com.leaf.xadmin.vo.enums.ErrorStatus;

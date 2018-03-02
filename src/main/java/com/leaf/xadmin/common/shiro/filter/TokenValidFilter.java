@@ -1,4 +1,4 @@
-package com.leaf.xadmin.other.shiro.filter;
+package com.leaf.xadmin.common.shiro.filter;
 
 import com.leaf.xadmin.vo.exception.GlobalException;
 import com.leaf.xadmin.utils.jwt.JwtUtil;

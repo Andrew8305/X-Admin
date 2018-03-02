@@ -1,14 +1,14 @@
-package com.leaf.xadmin.other.shiro.realm;
+package com.leaf.xadmin.common.shiro.realm;
 
-import com.leaf.xadmin.entity.Admin;
 import com.leaf.xadmin.entity.Permission;
 import com.leaf.xadmin.entity.Role;
-import com.leaf.xadmin.vo.enums.AdminStatus;
+import com.leaf.xadmin.entity.User;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
+import com.leaf.xadmin.vo.enums.UserStatus;
 import com.leaf.xadmin.vo.exception.GlobalException;
-import com.leaf.xadmin.service.IAdminService;
 import com.leaf.xadmin.service.IPermissionService;
 import com.leaf.xadmin.service.IRoleService;
+import com.leaf.xadmin.service.IUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -19,19 +19,16 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 /**
- * 自定义管理员权限域 AdminRealm
+ * 自定义用户权限域 UserRealm
  *
  * @author leaf
  */
-public class AdminRealm extends AuthorizingRealm {
+public class UserRealm extends AuthorizingRealm {
 
     @Autowired
     @Lazy
@@ -41,7 +38,7 @@ public class AdminRealm extends AuthorizingRealm {
     private IPermissionService permissionService;
     @Autowired
     @Lazy
-    private IAdminService adminService;
+    private IUserService userService;
 
     /**
      * 授权
@@ -66,8 +63,8 @@ public class AdminRealm extends AuthorizingRealm {
         String name = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         // 获取用户权限和角色列表
-        List<Role> roles = roleService.queryAdminRoles(name);
-        List<Permission> permissions = permissionService.queryAdminPermissions(name);
+        List<Role> roles = roleService.queryUserRoles(name);
+        List<Permission> permissions = permissionService.queryUserPermissions(name);
 
         // 加载用户角色列表
         for (Role role : roles) {
@@ -84,25 +81,25 @@ public class AdminRealm extends AuthorizingRealm {
     }
 
     /**
-     * 认证
+     * 用户认证
      *
      * @param authenticationToken
      * @return
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) {
-        // 获取管理员名
+        // 获取登录用户名
         String name = (String) authenticationToken.getPrincipal();
-        // 查找管理员信息
-        Admin admin = adminService.queryOne(name);
-        if (admin != null) {
-            // 判断管理员帐户是否被锁定
-            if (!admin.getStatus().equals(AdminStatus.NORMAL.getCode())) {
+        // 查找用户信息
+        User user = userService.queryOneByName(name);
+        if (user != null) {
+            // 判断用户帐户是否被锁定
+            if (!user.getStatus().equals(UserStatus.NORMAL.getCode())) {
                 throw new GlobalException(ErrorStatus.ACCOUNT_LOCK_ERROR);
             }
-            // 封装管理员认证信息
-            AuthenticationInfo authInfo = new SimpleAuthenticationInfo(admin.getName(),
-                    admin.getPass(), getName());
+            // 封装用户认证信息
+            AuthenticationInfo authInfo = new SimpleAuthenticationInfo(user.getName(),
+                    user.getPass(), getName());
             return authInfo;
         }
 

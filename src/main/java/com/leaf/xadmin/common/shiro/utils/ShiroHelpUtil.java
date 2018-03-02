@@ -1,4 +1,4 @@
-package com.leaf.xadmin.other.shiro.utils;
+package com.leaf.xadmin.common.shiro.utils;
 
 import com.google.common.base.Strings;
 import com.leaf.xadmin.constants.GlobalConstants;

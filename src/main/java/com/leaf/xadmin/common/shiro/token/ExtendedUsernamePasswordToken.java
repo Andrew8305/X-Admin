@@ -1,6 +1,7 @@
-package com.leaf.xadmin.other.shiro.token;
+package com.leaf.xadmin.common.shiro.token;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**
@@ -9,6 +10,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
  * <p>version: 1.0</p>
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ExtendedUsernamePasswordToken extends UsernamePasswordToken {
     private String loginType;
 

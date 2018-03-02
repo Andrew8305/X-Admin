@@ -1,14 +1,14 @@
 package com.leaf.xadmin.config;
 
 import com.leaf.xadmin.constants.GlobalConstants;
-import com.leaf.xadmin.other.shiro.filter.AuthorFlushFilter;
-import com.leaf.xadmin.other.shiro.filter.ForceLogoutFilter;
-import com.leaf.xadmin.other.shiro.filter.TokenValidFilter;
-import com.leaf.xadmin.other.shiro.matcher.PasswordMatcher;
-import com.leaf.xadmin.other.shiro.realm.AdminRealm;
-import com.leaf.xadmin.other.shiro.realm.ExtendedModularRealmAuthenticator;
-import com.leaf.xadmin.other.shiro.realm.UserRealm;
-import com.leaf.xadmin.other.shiro.redis.JwtSessionIdGenerator;
+import com.leaf.xadmin.common.shiro.filter.AuthorFlushFilter;
+import com.leaf.xadmin.common.shiro.filter.ForceLogoutFilter;
+import com.leaf.xadmin.common.shiro.filter.TokenValidFilter;
+import com.leaf.xadmin.common.shiro.matcher.PasswordMatcher;
+import com.leaf.xadmin.common.shiro.realm.AdminRealm;
+import com.leaf.xadmin.common.shiro.realm.ExtendedModularRealmAuthenticator;
+import com.leaf.xadmin.common.shiro.realm.UserRealm;
+import com.leaf.xadmin.common.shiro.redis.JwtSessionIdGenerator;
 import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;

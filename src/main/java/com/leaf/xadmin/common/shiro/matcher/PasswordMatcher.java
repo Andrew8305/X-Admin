@@ -1,6 +1,6 @@
-package com.leaf.xadmin.other.shiro.matcher;
+package com.leaf.xadmin.common.shiro.matcher;
 
-import com.leaf.xadmin.other.shiro.token.ExtendedUsernamePasswordToken;
+import com.leaf.xadmin.common.shiro.token.ExtendedUsernamePasswordToken;
 import com.leaf.xadmin.utils.encrypt.PassEncryptUtil;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
