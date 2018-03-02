@@ -1,19 +1,20 @@
-package com.leaf.xadmin.other.quartz.utils;
+package com.leaf.xadmin.service.impl;
 
-import com.leaf.xadmin.other.quartz.IBaseJob;
+import com.leaf.xadmin.common.quartz.IBaseJob;
+import com.leaf.xadmin.service.IQuartzService;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.exception.GlobalException;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author leaf
- * <p>date: 2018-02-14 0:09</p>
+ * <p>date: 2018-02-27 22:38</p>
  * <p>version: 1.0</p>
  */
-@Component
-public class QuartzCommonUtil {
+@Service
+public class QuartzServiceImpl implements IQuartzService {
 
     @Autowired
     private Scheduler scheduler;
@@ -26,6 +27,7 @@ public class QuartzCommonUtil {
      * @param cronExpression
      * @throws Exception
      */
+    @Override
     public void add(String jobClassName, String jobGroupName, String cronExpression) {
         try {
             // 启动调度器
@@ -50,6 +52,7 @@ public class QuartzCommonUtil {
      * @param jobGroupName
      * @throws Exception
      */
+    @Override
     public void pause(String jobClassName, String jobGroupName) {
         try {
             scheduler.pauseJob(JobKey.jobKey(jobClassName, jobGroupName));
@@ -65,6 +68,7 @@ public class QuartzCommonUtil {
      * @param jobGroupName
      * @throws Exception
      */
+    @Override
     public void resume(String jobClassName, String jobGroupName) {
         try {
             scheduler.resumeJob(JobKey.jobKey(jobClassName, jobGroupName));
@@ -81,6 +85,7 @@ public class QuartzCommonUtil {
      * @param cronExpression
      * @throws Exception
      */
+    @Override
     public void reschedule(String jobClassName, String jobGroupName, String cronExpression) {
         try {
             TriggerKey triggerKey = TriggerKey.triggerKey(jobClassName, jobGroupName);
@@ -103,6 +108,7 @@ public class QuartzCommonUtil {
      * @param jobGroupName
      * @throws Exception
      */
+    @Override
     public void delete(String jobClassName, String jobGroupName) {
         try {
             scheduler.pauseTrigger(TriggerKey.triggerKey(jobClassName, jobGroupName));

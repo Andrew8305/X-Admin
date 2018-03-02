@@ -1,4 +1,4 @@
-package com.leaf.xadmin.other.quartz;
+package com.leaf.xadmin.common.quartz;
 
 import org.quartz.Job;
 

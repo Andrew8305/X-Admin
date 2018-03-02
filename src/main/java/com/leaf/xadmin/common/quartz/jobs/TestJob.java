@@ -1,6 +1,6 @@
-package com.leaf.xadmin.other.quartz.jobs;
+package com.leaf.xadmin.common.quartz.jobs;
 
-import com.leaf.xadmin.other.quartz.IBaseJob;
+import com.leaf.xadmin.common.quartz.IBaseJob;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
