@@ -1,5 +1,6 @@
 package com.leaf.xadmin.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.leaf.xadmin.entity.Admin;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -10,5 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface AdminMapper extends SuperMapper<Admin> {
+public interface AdminMapper extends BaseMapper<Admin> {
 }

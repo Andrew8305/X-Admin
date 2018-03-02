@@ -1,5 +1,6 @@
 package com.leaf.xadmin.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.leaf.xadmin.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface PermissionMapper extends SuperMapper<Permission> {
+public interface PermissionMapper extends BaseMapper<Permission> {
     /**
      * 查询用户权限列表
      *

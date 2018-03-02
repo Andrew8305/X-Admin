@@ -1,6 +1,6 @@
 package com.leaf.xadmin.controller;
 
-import com.leaf.xadmin.other.quartz.utils.QuartzCommonUtil;
+import com.leaf.xadmin.service.IQuartzService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -20,35 +20,35 @@ import org.springframework.web.bind.annotation.*;
 public class JobController {
 
     @Autowired
-    private QuartzCommonUtil quartzCommonUtil;
+    private IQuartzService quartzService;
 
     @ApiOperation(value = "添加任务")
     @PostMapping(value = "add")
     public void add(@RequestParam(value = "jobClassName")String jobClassName,
                     @RequestParam(value = "jobGroupName")String jobGroupName,
                     @RequestParam(value = "cronExpression")String cronExpression) {
-        quartzCommonUtil.add(jobClassName, jobGroupName, cronExpression);
+        quartzService.add(jobClassName, jobGroupName, cronExpression);
     }
 
     @ApiOperation(value = "删除任务")
     @PostMapping(value = "delete")
     public void delete(@RequestParam(value = "jobClassName")String jobClassName,
                     @RequestParam(value = "jobGroupName")String jobGroupName) {
-        quartzCommonUtil.delete(jobClassName, jobGroupName);
+        quartzService.delete(jobClassName, jobGroupName);
     }
 
     @ApiOperation(value = "暂停任务")
     @PostMapping(value = "pause")
     public void pause(@RequestParam(value = "jobClassName")String jobClassName,
                     @RequestParam(value = "jobGroupName")String jobGroupName) {
-        quartzCommonUtil.pause(jobClassName, jobGroupName);
+        quartzService.pause(jobClassName, jobGroupName);
     }
 
     @ApiOperation(value = "继续任务")
     @PostMapping(value = "resume")
     public void resume(@RequestParam(value = "jobClassName")String jobClassName,
                     @RequestParam(value = "jobGroupName")String jobGroupName) {
-        quartzCommonUtil.resume(jobClassName, jobGroupName);
+        quartzService.resume(jobClassName, jobGroupName);
     }
 
     @ApiOperation(value = "重新安排任务")
@@ -56,6 +56,6 @@ public class JobController {
     public void reschedule(@RequestParam(value = "jobClassName")String jobClassName,
                     @RequestParam(value = "jobGroupName")String jobGroupName,
                     @RequestParam(value = "cronExpression")String cronExpression) {
-        quartzCommonUtil.reschedule(jobClassName, jobGroupName, cronExpression);
+        quartzService.reschedule(jobClassName, jobGroupName, cronExpression);
     }
 }

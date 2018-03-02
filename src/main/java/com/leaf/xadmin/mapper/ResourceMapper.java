@@ -1,5 +1,6 @@
 package com.leaf.xadmin.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.leaf.xadmin.entity.Permission;
 import com.leaf.xadmin.entity.Resource;
 import com.leaf.xadmin.entity.Role;
@@ -16,7 +17,7 @@ import java.util.Set;
  */
 @Mapper
 @Repository
-public interface ResourceMapper extends SuperMapper<Resource> {
+public interface ResourceMapper extends BaseMapper<Resource> {
 
     /**
      * 批量添加资源列表

@@ -1,5 +1,6 @@
 package com.leaf.xadmin.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.leaf.xadmin.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface RoleMapper extends SuperMapper<Role> {
+public interface RoleMapper extends BaseMapper<Role> {
     /**
      * 查询用户角色列表
      *

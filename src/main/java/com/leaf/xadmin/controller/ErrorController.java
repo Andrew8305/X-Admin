@@ -94,28 +94,28 @@ public class ErrorController extends AbstractErrorController {
 
     @ApiOperation(value = "用户未登陆")
     @ExceptionHandler({UnauthenticatedException.class})
-    @GetMapping("authen")
+    @GetMapping("no_authen")
     public ResponseResultVO unauthenticatedException(Exception e) {
         return ResponseResultUtil.fail(ErrorStatus.AUTHEN_LACK_ERROR, e.getClass().getName());
     }
 
     @ApiOperation(value = "用户名或密码错误")
     @ExceptionHandler({UnknownAccountException.class, IncorrectCredentialsException.class})
-    @GetMapping("login")
+    @GetMapping("login_fail")
     public ResponseResultVO unknownAccountException(Exception e) {
         return ResponseResultUtil.fail(ErrorStatus.LOGIN_FAIL_ERROR, e.getClass().getName());
     }
 
     @ApiOperation(value = "尚未授权，无法操作")
     @ExceptionHandler({UnauthorizedException.class})
-    @GetMapping("author")
+    @GetMapping("no_author")
     public ResponseResultVO unauthorizedException(Exception e) {
         return ResponseResultUtil.fail(ErrorStatus.AUTHOR_LACK_ERROR, e.getClass().getName());
     }
 
     @ApiOperation(value = "HTTP请求方法错误")
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
-    @GetMapping("method")
+    @GetMapping("no_match_method_type")
     public ResponseResultVO httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         Set<HttpMethod> supportedHttpMethods = e.getSupportedHttpMethods();
         HttpMethod next = supportedHttpMethods.iterator().next();

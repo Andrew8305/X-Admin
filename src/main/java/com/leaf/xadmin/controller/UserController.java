@@ -1,7 +1,7 @@
 package com.leaf.xadmin.controller;
 
 import com.leaf.xadmin.vo.enums.LoginType;
-import com.leaf.xadmin.other.shiro.token.ExtendedUsernamePasswordToken;
+import com.leaf.xadmin.common.shiro.token.ExtendedUsernamePasswordToken;
 import com.leaf.xadmin.vo.ResponseResultVO;
 import com.leaf.xadmin.entity.User;
 import com.leaf.xadmin.service.IUserService;
@@ -38,7 +38,7 @@ public class UserController {
 
     @ApiOperation(value = "用户登录")
     @PostMapping(value = "login")
-    public ResponseResultVO login(@RequestParam("name") String name, @RequestParam("pass") String pass, HttpServletResponse response) throws Exception {
+    public ResponseResultVO login(@RequestParam("name") String name, @RequestParam("pass") String pass, HttpServletResponse response) {
         String loginToken; // 登录凭证
         Subject subject = SecurityUtils.getSubject();
         if (!subject.isAuthenticated()) {
@@ -83,5 +83,23 @@ public class UserController {
     @GetMapping(value = "getUser/{name}")
     public ResponseResultVO getUserByName(@PathVariable("name") String name) {
         return ResponseResultUtil.success(userService.queryOneByName(name));
+    }
+
+    @ApiOperation(value = "获取全部用户信息")
+    @GetMapping(value = "getAll")
+    public ResponseResultVO getAll() {
+        return ResponseResultUtil.success(userService.queryList());
+    }
+
+    @ApiOperation(value = "获取指定类型用户信息列表")
+    @GetMapping(value = "getListByType")
+    public ResponseResultVO getListByType(@RequestParam("type") Integer type) {
+        return ResponseResultUtil.success(userService.queryListByType(type));
+    }
+
+    @ApiOperation(value = "获取指定状态用户信息列表")
+    @GetMapping(value = "getListByStatus")
+    public ResponseResultVO getListByStatus(@RequestParam("status") Integer status) {
+        return ResponseResultUtil.success(userService.queryListByStatus(status));
     }
 }

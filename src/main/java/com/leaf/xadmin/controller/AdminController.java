@@ -7,7 +7,7 @@ import com.leaf.xadmin.vo.dto.AdminInfoDTO;
 import com.leaf.xadmin.vo.enums.LoginType;
 import com.leaf.xadmin.service.IAdminService;
 import com.leaf.xadmin.service.IResourceService;
-import com.leaf.xadmin.other.shiro.token.ExtendedUsernamePasswordToken;
+import com.leaf.xadmin.common.shiro.token.ExtendedUsernamePasswordToken;
 import com.leaf.xadmin.utils.request.RequestMappingResolveUtil;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;
 import com.leaf.xadmin.vo.RequestResourceVO;

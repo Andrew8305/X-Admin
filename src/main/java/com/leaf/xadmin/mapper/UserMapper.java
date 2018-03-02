@@ -1,5 +1,6 @@
 package com.leaf.xadmin.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.leaf.xadmin.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface UserMapper extends SuperMapper<User> {
+public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 查询指定用户名、密码用户
