@@ -1,15 +1,18 @@
 package com.leaf.xadmin.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.leaf.xadmin.config.datasource.DataSourceTypeEnum;
 import com.leaf.xadmin.entity.Admin;
+import com.leaf.xadmin.common.annotations.TargetDataSource;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.enums.LoginType;
 import com.leaf.xadmin.vo.exception.GlobalException;
 import com.leaf.xadmin.mapper.AdminMapper;
 import com.leaf.xadmin.service.IAdminService;
-import com.leaf.xadmin.other.shiro.utils.ShiroHelpUtil;
+import com.leaf.xadmin.common.shiro.utils.ShiroHelpUtil;
 import com.leaf.xadmin.utils.encrypt.PassEncryptUtil;
 import com.leaf.xadmin.utils.generator.SnowflakeUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +27,13 @@ import java.util.Random;
  * <p>date: 2018-01-05 18:35</p>
  */
 @Service
+@Slf4j
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
 
     @Autowired
     private PassEncryptUtil passEncryptUtil;
 
+    @TargetDataSource(name = DataSourceTypeEnum.SECOND)
     @Override
     public Admin queryOne(String name) {
         return baseMapper.selectOne(Admin.builder().name(name).build());

@@ -1,6 +1,5 @@
 package com.leaf.xadmin.service.impl;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.Permission;
 import com.leaf.xadmin.entity.Resource;
@@ -9,7 +8,6 @@ import com.leaf.xadmin.mapper.ResourceMapper;
 import com.leaf.xadmin.service.IResourceService;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLDataException;
 import java.util.List;
 import java.util.Set;
 
