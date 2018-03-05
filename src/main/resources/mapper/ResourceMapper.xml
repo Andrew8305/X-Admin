@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.leaf.xadmin.mapper.ResourceMapper">
+<mapper namespace="com.leaf.xadmin.mapper.primary.ResourceMapper">
 
     <sql id="RESOURCE_COLS">
         r.id, r.name, r.desc, r.path, r.type, r.create_time, r.update_time

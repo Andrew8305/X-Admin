@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.leaf.xadmin.mapper.PermissionMapper">
+<mapper namespace="com.leaf.xadmin.mapper.primary.PermissionMapper">
     <sql id="PERMISSION_COLS">
         p.id, p.name, p.desc, p.create_time, p.update_time
     </sql>
