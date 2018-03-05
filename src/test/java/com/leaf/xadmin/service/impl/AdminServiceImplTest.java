@@ -1,5 +1,6 @@
 package com.leaf.xadmin.service.impl;
 
+import com.leaf.xadmin.config.datasource.DataSourceContextHolder;
 import com.leaf.xadmin.entity.Admin;
 import com.leaf.xadmin.service.IAdminService;
 import lombok.extern.slf4j.Slf4j;
