@@ -21,6 +21,7 @@ import org.springframework.util.StringUtils;
 @Aspect
 @Component
 @Slf4j
+@Deprecated
 public class MapperDynamicDataSourceAspect {
 
     @Pointcut("execution(* com.leaf.xadmin.mapper..*.*(..))")

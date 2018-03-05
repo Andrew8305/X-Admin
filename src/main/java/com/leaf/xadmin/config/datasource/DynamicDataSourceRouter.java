@@ -9,6 +9,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  * <p>date: 2018-02-28 12:35</p>
  * <p>version: 1.0</p>
  */
+@Deprecated
 public class DynamicDataSourceRouter extends AbstractRoutingDataSource {
 
     /**

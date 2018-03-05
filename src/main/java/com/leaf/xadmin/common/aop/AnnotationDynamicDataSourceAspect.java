@@ -26,6 +26,7 @@ import java.lang.reflect.Method;
 @Order(-1)
 @Component
 @Slf4j
+@Deprecated
 public class AnnotationDynamicDataSourceAspect {
 
     @Pointcut("@annotation(com.leaf.xadmin.common.annotations.TargetDataSource)")

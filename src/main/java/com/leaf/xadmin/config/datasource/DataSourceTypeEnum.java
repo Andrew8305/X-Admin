@@ -11,6 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
+@Deprecated
 public enum DataSourceTypeEnum {
     // 数据源枚举
     PRIMARY("primary"), SECOND("second");
