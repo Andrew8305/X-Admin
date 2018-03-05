@@ -7,7 +7,7 @@ import com.leaf.xadmin.common.annotations.TargetDataSource;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.enums.LoginType;
 import com.leaf.xadmin.vo.exception.GlobalException;
-import com.leaf.xadmin.mapper.AdminMapper;
+import com.leaf.xadmin.mapper.primary.AdminMapper;
 import com.leaf.xadmin.service.IAdminService;
 import com.leaf.xadmin.common.shiro.utils.ShiroHelpUtil;
 import com.leaf.xadmin.utils.encrypt.PassEncryptUtil;
@@ -33,7 +33,6 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Autowired
     private PassEncryptUtil passEncryptUtil;
 
-    @TargetDataSource(name = DataSourceTypeEnum.SECOND)
     @Override
     public Admin queryOne(String name) {
         return baseMapper.selectOne(Admin.builder().name(name).build());

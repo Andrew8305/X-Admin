@@ -2,8 +2,9 @@ package com.leaf.xadmin.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.Permission;
-import com.leaf.xadmin.mapper.PermissionMapper;
+import com.leaf.xadmin.mapper.primary.PermissionMapper;
 import com.leaf.xadmin.service.IPermissionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * <p>version: 1.0</p>
  */
 @Service
+@Slf4j
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
 
     @Override

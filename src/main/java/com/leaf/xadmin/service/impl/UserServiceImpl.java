@@ -7,11 +7,12 @@ import com.leaf.xadmin.entity.User;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.enums.LoginType;
 import com.leaf.xadmin.vo.exception.GlobalException;
-import com.leaf.xadmin.mapper.UserMapper;
+import com.leaf.xadmin.mapper.primary.UserMapper;
 import com.leaf.xadmin.service.IAccountService;
 import com.leaf.xadmin.service.IUserService;
 import com.leaf.xadmin.utils.encrypt.PassEncryptUtil;
 import com.leaf.xadmin.utils.generator.SnowflakeUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -29,6 +30,7 @@ import java.util.Random;
  */
 @Service
 @CacheConfig(cacheNames = "users")
+@Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Autowired

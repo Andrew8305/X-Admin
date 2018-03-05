@@ -4,8 +4,9 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.Permission;
 import com.leaf.xadmin.entity.Resource;
 import com.leaf.xadmin.entity.Role;
-import com.leaf.xadmin.mapper.ResourceMapper;
+import com.leaf.xadmin.mapper.primary.ResourceMapper;
 import com.leaf.xadmin.service.IResourceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Set;
  * <p>version: 1.0</p>
  */
 @Service
+@Slf4j
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements IResourceService {
 
     @Override

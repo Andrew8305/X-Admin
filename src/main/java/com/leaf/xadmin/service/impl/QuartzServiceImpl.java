@@ -4,6 +4,7 @@ import com.leaf.xadmin.common.quartz.IBaseJob;
 import com.leaf.xadmin.service.IQuartzService;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.exception.GlobalException;
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
  * <p>version: 1.0</p>
  */
 @Service
+@Slf4j
 public class QuartzServiceImpl implements IQuartzService {
 
     @Autowired

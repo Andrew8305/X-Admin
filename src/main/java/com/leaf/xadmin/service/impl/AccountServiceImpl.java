@@ -2,10 +2,11 @@ package com.leaf.xadmin.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.Account;
-import com.leaf.xadmin.mapper.AccountMapper;
+import com.leaf.xadmin.mapper.primary.AccountMapper;
 import com.leaf.xadmin.service.IAccountService;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.exception.GlobalException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -18,6 +19,7 @@ import java.io.Serializable;
  * <p>version: 1.0</p>
  */
 @Service
+@Slf4j
 public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements IAccountService {
 
     @Override

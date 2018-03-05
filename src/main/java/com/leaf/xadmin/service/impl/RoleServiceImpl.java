@@ -2,8 +2,9 @@ package com.leaf.xadmin.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.Role;
-import com.leaf.xadmin.mapper.RoleMapper;
+import com.leaf.xadmin.mapper.primary.RoleMapper;
 import com.leaf.xadmin.service.IRoleService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * <p>version: 1.0</p>
  */
 @Service
+@Slf4j
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
 
     @Override
