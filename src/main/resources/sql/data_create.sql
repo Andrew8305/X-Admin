@@ -1,5 +1,5 @@
 -- 选中数据库
-use house_rent;
+use x_admin;
 
 -- user测试数据
 TRUNCATE TABLE user;

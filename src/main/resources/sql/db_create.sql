@@ -1,9 +1,9 @@
 -- 数据库创建
-DROP DATABASE IF EXISTS house_rent;
-CREATE DATABASE house_rent DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;;
+DROP DATABASE IF EXISTS x_admin;
+CREATE DATABASE x_admin DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;;
 
 -- 选择数据库
-USE house_rent;
+USE x_admin;
 
 -- 用户表
 DROP TABLE user;
