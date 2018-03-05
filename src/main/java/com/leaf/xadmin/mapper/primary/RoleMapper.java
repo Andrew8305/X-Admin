@@ -1,4 +1,4 @@
-package com.leaf.xadmin.mapper;
+package com.leaf.xadmin.mapper.primary;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.leaf.xadmin.entity.Role;
