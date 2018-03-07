@@ -54,7 +54,7 @@ CREATE TABLE role_permission (
 DROP TABLE IF EXISTS resource;
 CREATE TABLE resource (
   `id` VARCHAR(32) PRIMARY KEY,
-  `parent_id` VARCHAR(32) NOT NULL COMMENT '父资源id',
+  `parent_id` VARCHAR(32) DEFAULT NULL COMMENT '父资源id',
   `name` VARCHAR(64) COMMENT '资源名',
   `desc` VARCHAR(64) COMMENT '资源描述',
   `path` VARCHAR(64) COMMENT '资源路径',
