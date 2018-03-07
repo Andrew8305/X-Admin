@@ -18,6 +18,7 @@ CREATE TABLE user (
   `last_login_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '最后登录时间',
   `last_login_ip` INTEGER UNSIGNED COMMENT '最后登录ip',
   `last_login_local` VARCHAR(32) COMMENT '最后登录地点',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   UNIQUE INDEX uniq_phone(phone),
@@ -40,6 +41,7 @@ CREATE TABLE account(
   `wechat` VARCHAR(64) COMMENT '微信号',
   `realname` VARCHAR(16) COMMENT '真实姓名',
   `identity` VARCHAR(18) COMMENT '身份证号',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   UNIQUE INDEX uniq_nickname(nickname),
@@ -56,6 +58,7 @@ CREATE TABLE role (
   `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(16) NOT NULL COMMENT '角色名',
   `desc` VARCHAR(32) COMMENT '角色描述',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   UNIQUE INDEX uniq_name(name)
@@ -83,6 +86,7 @@ CREATE TABLE permission (
   `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(16) NOT NULL COMMENT '权限名',
   `desc` VARCHAR(32) COMMENT '权限描述',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   UNIQUE INDEX uniq_name(name)
@@ -113,6 +117,7 @@ CREATE TABLE admin (
   `last_login_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '最后登录时间',
   `last_login_ip` INTEGER UNSIGNED COMMENT '最后登录ip',
   `last_login_local` VARCHAR(32) COMMENT '最后登录地点',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   UNIQUE INDEX uniq_name(name)
@@ -128,6 +133,7 @@ CREATE TABLE notice (
   `status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态',
   `ip` INTEGER UNSIGNED COMMENT 'ip地址',
   `admin_id` BIGINT NOT NULL COMMENT '管理员id',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间'
 ) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='公告表';
@@ -140,6 +146,7 @@ CREATE TABLE sys_log (
   `desc` VARCHAR(128) COMMENT '描述',
   `type` TINYINT NOT NULL DEFAULT 1 COMMENT '类型',
   `status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间'
 ) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='系统日志表(记录系统运行日志)';
@@ -154,6 +161,7 @@ CREATE TABLE admin_log (
   `status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态',
   `ip` INTEGER UNSIGNED COMMENT 'ip地址',
   `admin_id` BIGINT NOT NULL COMMENT '管理员id',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间'
 ) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='管理员日志表(记录管理员日常操作)';
@@ -168,6 +176,7 @@ CREATE TABLE user_log (
   `status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态',
   `ip` INTEGER UNSIGNED COMMENT 'ip地址',
   `user_id` VARCHAR(32) NOT NULL COMMENT '用户id',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间'
 ) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='用户日志表(记录用户日常操作)';
@@ -180,12 +189,13 @@ CREATE TABLE resource (
   `desc` VARCHAR(64) COMMENT '资源描述',
   `path` VARCHAR(64) COMMENT '请求资源路径',
   `type` TINYINT NOT NULL DEFAULT 1 COMMENT '资源类型',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   UNIQUE INDEX uniq_path(path)
 ) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='资源表';
 
--- 资源权限表
+-- 资源权限表(关联表)
 DROP TABLE resource_perm;
 CREATE TABLE resource_perm (
   `resource_id` BIGINT NOT NULL COMMENT '资源id',
@@ -193,10 +203,58 @@ CREATE TABLE resource_perm (
   PRIMARY KEY (resource_id, permission_id)
 ) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='资源权限表';
 
--- 资源角色表
+-- 资源角色表(关联表)
 DROP TABLE resource_role;
 CREATE TABLE resource_role (
   `resource_id` BIGINT NOT NULL COMMENT '资源id',
   `role_id` BIGINT NOT NULL COMMENT '角色id',
   PRIMARY KEY (resource_id, role_id)
 ) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='资源角色表';
+
+-- 字典类型表
+DROP TABLE dictionary_type;
+CREATE TABLE dictionary_type (
+  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+  `code` TINYINT NOT NULL COMMENT '类型代码',
+  `name` VARCHAR(8) NOT NULL COMMENT '类型名称',
+  `desc` VARCHAR(64) COMMENT '类型描述',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
+  `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  UNIQUE INDEX uniq_code(code),
+  UNIQUE INDEX uniq_name(name)
+) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='字典类型表';
+
+-- 字典明细表
+DROP TABLE dictionary_info;
+CREATE TABLE dictionary_info(
+  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+  `code` TINYINT NOT NULL COMMENT '字典代码',
+  `name` VARCHAR(8) NOT NULL COMMENT '字典名称',
+  `status` TINYINT NOT NULL DEFAULT 1 COMMENT '字典状态',
+  `asc` TINYINT NOT NULL COMMENT '显示顺序',
+  `desc` VARCHAR(64) COMMENT '字典描述',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
+  `dictionary_type` BIGINT NOT NULL COMMENT '字典类型',
+  `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  UNIQUE INDEX uniq_code(code),
+  UNIQUE INDEX uniq_name(name)
+) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='字典明细表';
+
+-- 附件表
+DROP TABLE attachment;
+CREATE TABLE attachment(
+  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(32) NOT NULL COMMENT '附件名',
+  `old_name` VARCHAR(32) NOT NULL COMMENT '原始名',
+  `size` BIGINT NOT NULL COMMENT '大小',
+  `type` TINYINT NOT NULL DEFAULT 1 COMMENT '类型',
+  `path_prefix` VARCHAR(64) NOT NULL COMMENT '路径前缀',
+  `delete_flag` TINYINT NOT NULL DEFAULT 1 COMMENT '逻辑删除标志',
+  `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  UNIQUE INDEX uniq_name(name)
+) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='附件表';
+
+

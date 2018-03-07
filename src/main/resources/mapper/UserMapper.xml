@@ -5,34 +5,34 @@
         id, name, pass, phone, email, type, status, last_login_time, INET_NTOA(last_login_ip), last_login_local, create_time, update_time
     </sql>
 
-    <select id="selectUserByNameAndPass" resultType="com.leaf.xadmin.entity.User">
+    <select id="selectOneByNameAndPass" resultType="com.leaf.xadmin.entity.User">
         SELECT
         <include refid="USER_COLS" />
         FROM user WHERE
         name = #{name} AND pass = #{pass} AND type = 1
     </select>
 
-    <select id="selectUserByName" parameterType="string" resultType="com.leaf.xadmin.entity.User">
+    <select id="selectOneByName" parameterType="string" resultType="com.leaf.xadmin.entity.User">
         SELECT
         <include refid="USER_COLS" />
         FROM user WHERE
         name = #{name}
     </select>
 
-    <select id="selectUserById" parameterType="string" resultType="com.leaf.xadmin.entity.User">
+    <select id="selectOneById" parameterType="string" resultType="com.leaf.xadmin.entity.User">
         SELECT
         <include refid="USER_COLS" />
         FROM user WHERE
         id = #{id}
     </select>
 
-    <select id="selectAllUsers" resultType="com.leaf.xadmin.entity.User">
+    <select id="selectAll" resultType="com.leaf.xadmin.entity.User">
         SELECT
         <include refid="USER_COLS" />
         FROM user
     </select>
 
-    <select id="selectStatusUsers" parameterType="integer" resultType="com.leaf.xadmin.entity.User">
+    <select id="selectListByStatus" parameterType="integer" resultType="com.leaf.xadmin.entity.User">
         SELECT
         <include refid="USER_COLS" />
         FROM user WHERE

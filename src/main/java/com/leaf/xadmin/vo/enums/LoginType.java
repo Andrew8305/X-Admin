@@ -12,9 +12,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum LoginType {
     // 登录类型
-    ADMIN("Admin"),
-    USER("User"),
+    ADMIN("admin"),
+    USER("user"),
     ;
 
-    private String type;
+    private String value;
 }
