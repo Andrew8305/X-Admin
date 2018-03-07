@@ -1,7 +1,6 @@
 package com.leaf.xadmin.utils.serializer;
 
-import com.leaf.xadmin.entity.User;
-import com.leaf.xadmin.utils.serializer.SerializeUtil;
+import com.leaf.xadmin.entity.front.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

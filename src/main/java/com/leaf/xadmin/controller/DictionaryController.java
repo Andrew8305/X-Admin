@@ -1,8 +1,8 @@
 package com.leaf.xadmin.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.leaf.xadmin.entity.DictionaryInfo;
-import com.leaf.xadmin.entity.DictionaryType;
+import com.leaf.xadmin.entity.bg.DictionaryInfo;
+import com.leaf.xadmin.entity.bg.DictionaryType;
 import com.leaf.xadmin.service.IDictionaryInfoService;
 import com.leaf.xadmin.service.IDictionaryTypeService;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;

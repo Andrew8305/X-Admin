@@ -2,15 +2,9 @@ package com.leaf.xadmin.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
-import com.google.common.collect.Lists;
-import com.leaf.xadmin.entity.Admin;
+import com.leaf.xadmin.entity.bg.Admin;
 import com.leaf.xadmin.vo.enums.LoginType;
-import io.swagger.models.auth.In;
 import org.apache.shiro.session.Session;
-
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * @author leaf

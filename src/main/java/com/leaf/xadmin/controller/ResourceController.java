@@ -2,7 +2,7 @@ package com.leaf.xadmin.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.leaf.xadmin.constants.GlobalConstants;
-import com.leaf.xadmin.entity.Resource;
+import com.leaf.xadmin.entity.auth.Resource;
 import com.leaf.xadmin.service.IResourceService;
 import com.leaf.xadmin.utils.request.RequestMappingResolveUtil;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;

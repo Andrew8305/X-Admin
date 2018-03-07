@@ -1,11 +1,9 @@
-package com.leaf.xadmin.mapper.primary;
+package com.leaf.xadmin.mapper.bg;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.leaf.xadmin.entity.Admin;
+import com.leaf.xadmin.entity.bg.Admin;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @author leaf

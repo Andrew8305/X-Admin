@@ -2,7 +2,7 @@ package com.leaf.xadmin.utils.request;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.leaf.xadmin.entity.Resource;
+import com.leaf.xadmin.entity.auth.Resource;
 import com.leaf.xadmin.vo.RequestResourceVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

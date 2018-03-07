@@ -3,9 +3,9 @@ package com.leaf.xadmin.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.leaf.xadmin.entity.Account;
-import com.leaf.xadmin.entity.User;
-import com.leaf.xadmin.mapper.primary.UserMapper;
+import com.leaf.xadmin.entity.front.Account;
+import com.leaf.xadmin.entity.front.User;
+import com.leaf.xadmin.mapper.front.UserMapper;
 import com.leaf.xadmin.service.IAccountService;
 import com.leaf.xadmin.service.IUserService;
 import com.leaf.xadmin.utils.encrypt.PassEncryptUtil;
@@ -21,7 +21,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import java.io.Serializable;
 import java.util.Random;
 
 /**

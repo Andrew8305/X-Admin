@@ -2,9 +2,9 @@ package com.leaf.xadmin.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
-import com.leaf.xadmin.entity.Permission;
-import com.leaf.xadmin.entity.Resource;
-import com.leaf.xadmin.entity.Role;
+import com.leaf.xadmin.entity.auth.Permission;
+import com.leaf.xadmin.entity.auth.Resource;
+import com.leaf.xadmin.entity.auth.Role;
 
 import java.io.Serializable;
 import java.sql.SQLDataException;

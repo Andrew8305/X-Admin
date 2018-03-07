@@ -2,7 +2,7 @@ package com.leaf.xadmin.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
-import com.leaf.xadmin.entity.DictionaryInfo;
+import com.leaf.xadmin.entity.bg.DictionaryInfo;
 
 import java.io.Serializable;
 

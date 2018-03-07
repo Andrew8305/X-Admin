@@ -1,7 +1,7 @@
-package com.leaf.xadmin.mapper.primary;
+package com.leaf.xadmin.mapper.auth;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.leaf.xadmin.entity.Permission;
+import com.leaf.xadmin.entity.auth.Permission;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

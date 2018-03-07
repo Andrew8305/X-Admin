@@ -1,8 +1,8 @@
 package com.leaf.xadmin.common.shiro.realm;
 
-import com.leaf.xadmin.entity.Permission;
-import com.leaf.xadmin.entity.Role;
-import com.leaf.xadmin.entity.User;
+import com.leaf.xadmin.entity.auth.Permission;
+import com.leaf.xadmin.entity.auth.Role;
+import com.leaf.xadmin.entity.front.User;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.enums.UserStatus;
 import com.leaf.xadmin.vo.exception.GlobalException;

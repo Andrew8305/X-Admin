@@ -1,4 +1,4 @@
-package com.leaf.xadmin.entity;
+package com.leaf.xadmin.entity.front;
 
 import com.baomidou.mybatisplus.annotations.TableLogic;
 import lombok.AllArgsConstructor;
@@ -11,17 +11,27 @@ import java.util.Date;
 
 /**
  * @author leaf
- * <p>date: 2018-01-03 13:29</p>
+ * <p>date: 2018-01-05 18:25</p>
  */
 @Builder
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Permission {
-    private Long id;
-    private String name;
+public class Account {
+    private String id;
+    private String nickname;
+    private String phone;
+    private String email;
+    private String avatar;
+    private Integer age;
+    private Integer sex;
     private String desc;
+    private String qq;
+    private String wechat;
+    private String realname;
+    private String identity;
+    private Integer type;
     @TableLogic
     private Integer deleteFlag;
     private Date createTime;

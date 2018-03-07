@@ -3,7 +3,7 @@ package com.leaf.xadmin.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.qrtz.QrtzTriggers;
-import com.leaf.xadmin.mapper.second.QrtzTriggersMapper;
+import com.leaf.xadmin.mapper.qrtz.QrtzTriggersMapper;
 import com.leaf.xadmin.service.IQrtzTriggersService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

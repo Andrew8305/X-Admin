@@ -2,9 +2,7 @@ package com.leaf.xadmin.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
-import com.leaf.xadmin.entity.User;
-
-import java.io.Serializable;
+import com.leaf.xadmin.entity.front.User;
 
 /**
  * @author leaf

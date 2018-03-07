@@ -1,8 +1,8 @@
 package com.leaf.xadmin.common.aop;
 
-import com.leaf.xadmin.entity.Permission;
-import com.leaf.xadmin.entity.Resource;
-import com.leaf.xadmin.entity.Role;
+import com.leaf.xadmin.entity.auth.Permission;
+import com.leaf.xadmin.entity.auth.Resource;
+import com.leaf.xadmin.entity.auth.Role;
 import com.leaf.xadmin.service.IResourceService;
 import com.leaf.xadmin.utils.request.RequestMappingResolveUtil;
 import com.leaf.xadmin.vo.RequestResourceVO;

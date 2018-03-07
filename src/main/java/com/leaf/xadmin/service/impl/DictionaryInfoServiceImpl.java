@@ -3,8 +3,8 @@ package com.leaf.xadmin.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.leaf.xadmin.entity.DictionaryInfo;
-import com.leaf.xadmin.mapper.primary.DictInfoMapper;
+import com.leaf.xadmin.entity.bg.DictionaryInfo;
+import com.leaf.xadmin.mapper.bg.DictInfoMapper;
 import com.leaf.xadmin.service.IDictionaryInfoService;
 import org.springframework.stereotype.Service;
 

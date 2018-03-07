@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @PropertySource(value = {"classpath:druid/druid.properties"})
-@MapperScan(basePackages = "com.leaf.xadmin.mapper.second", sqlSessionTemplateRef = "secondSqlSessionTemplate")
+@MapperScan(basePackages = "com.leaf.xadmin.mapper.front", sqlSessionTemplateRef = "secondSqlSessionTemplate")
 public class SecondDatabaseConfig {
 
     @Bean(name = "secondDataSource")

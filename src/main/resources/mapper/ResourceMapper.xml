@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.leaf.xadmin.mapper.primary.ResourceMapper">
+<mapper namespace="com.leaf.xadmin.mapper.auth.ResourceMapper">
 
     <sql id="RESOURCE_COLS">
         r.id, r.name, r.desc, r.path, r.type, r.create_time, r.update_time
@@ -85,7 +85,7 @@
         WHERE resource_id = #{id}
     </delete>
 
-    <select id="selectResourceRoles" resultType="com.leaf.xadmin.entity.Role">
+    <select id="selectResourceRoles" resultType="com.leaf.xadmin.entity.auth.Role">
       SELECT <include refid="ROLE_COLS" />
       FROM resource r
       RIGHT JOIN resource_role rr ON r.id = rr.resource_id
@@ -93,7 +93,7 @@
       WHERE r.id = #{resourceId}
     </select>
 
-    <select id="selectResourcePermissions" resultType="com.leaf.xadmin.entity.Permission">
+    <select id="selectResourcePermissions" resultType="com.leaf.xadmin.entity.auth.Permission">
         SELECT <include refid="PERMISSION_COLS" />
         FROM resource r
         RIGHT JOIN resource_perm rp ON r.id = rp.resource_id
@@ -101,7 +101,7 @@
         WHERE r.id = #{resourceId}
     </select>
 
-    <select id="selectResourceRolesByPath" resultType="com.leaf.xadmin.entity.Role">
+    <select id="selectResourceRolesByPath" resultType="com.leaf.xadmin.entity.auth.Role">
         SELECT <include refid="ROLE_COLS" />
         FROM resource r
         RIGHT JOIN resource_role rr ON r.id = rr.resource_id
@@ -109,7 +109,7 @@
         WHERE r.path = #{path}
     </select>
 
-    <select id="selectResourcePermissionsByPath" resultType="com.leaf.xadmin.entity.Permission">
+    <select id="selectResourcePermissionsByPath" resultType="com.leaf.xadmin.entity.auth.Permission">
         SELECT <include refid="PERMISSION_COLS" />
         FROM resource r
         RIGHT JOIN resource_perm rp ON r.id = rp.resource_id

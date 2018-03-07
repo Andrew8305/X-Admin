@@ -1,4 +1,4 @@
-package com.leaf.xadmin.entity;
+package com.leaf.xadmin.entity.front;
 
 import com.baomidou.mybatisplus.annotations.TableLogic;
 import lombok.AllArgsConstructor;
@@ -7,28 +7,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
  * @author leaf
- * <p>date: 2018-01-05 18:51</p>
+ * <p>date: 2017-12-28 21:35</p>
  */
 @Builder
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Admin {
+public class User {
     private String id;
     private String name;
     private String pass;
-    private String phone;
     private String email;
-    private String avatar;
-    private Integer age;
-    private Integer sex;
-    private String desc;
-    private Integer type;
+    private String phone;
     private Integer status;
     private Date lastLoginTime;
     private String lastLoginIp;

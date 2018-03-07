@@ -1,4 +1,4 @@
-package com.leaf.xadmin.entity;
+package com.leaf.xadmin.entity.front;
 
 import com.baomidou.mybatisplus.annotations.TableLogic;
 import lombok.AllArgsConstructor;
@@ -11,19 +11,22 @@ import java.util.Date;
 
 /**
  * @author leaf
- * <p>date: 2018-01-12 17:14</p>
+ * <p>date: 2018-03-06 15:11</p>
+ * <p>version: 1.0</p>
  */
 @Builder
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SysLog {
+public class Attachment {
     private Long id;
-    private String local;
-    private String desc;
+    private String name;
+    private String oldName;
+    private String namePostfix;
+    private Long size;
     private Integer type;
-    private Integer status;
+    private String pathPrefix;
     @TableLogic
     private Integer deleteFlag;
     private Date createTime;
