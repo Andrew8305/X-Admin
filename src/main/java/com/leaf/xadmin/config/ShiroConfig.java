@@ -120,6 +120,7 @@ public class ShiroConfig {
         ExtendedModularRealmAuthenticator authenticator = new ExtendedModularRealmAuthenticator();
         // 配置认证策略(仅单个realm认证成功即可)
         authenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+        authenticator.setRealms(realmCollection());
         return authenticator;
     }
 

@@ -9,7 +9,7 @@
         SELECT
         <include refid="USER_COLS" />
         FROM user WHERE
-        name = #{name} AND pass = #{pass} AND type = 1
+        name = #{name} AND pass = #{pass}
     </select>
 
     <select id="selectOneByName" parameterType="string" resultType="com.leaf.xadmin.entity.front.User">
@@ -30,13 +30,6 @@
         SELECT
         <include refid="USER_COLS" />
         FROM user
-    </select>
-
-    <select id="selectListByStatus" parameterType="integer" resultType="com.leaf.xadmin.entity.front.User">
-        SELECT
-        <include refid="USER_COLS" />
-        FROM user WHERE
-        type = #{type}
     </select>
 
 </mapper>

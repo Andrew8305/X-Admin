@@ -47,12 +47,4 @@ public interface UserMapper extends BaseMapper<User> {
      * @return
      */
     List<User> selectAll();
-
-    /**
-     * 查询指定状态用户列表
-     *
-     * @param status
-     * @return
-     */
-    List<User> selectListByStatus(Integer status);
 }

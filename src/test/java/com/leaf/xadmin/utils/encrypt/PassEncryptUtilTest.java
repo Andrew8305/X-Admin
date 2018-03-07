@@ -22,8 +22,8 @@ public class PassEncryptUtilTest {
 
     @Test
     public void decryptPass() throws Exception {
-        passEncryptUtil.setSecretKey(LoginType.USER.getValue() + "xbc");
-        log.info(passEncryptUtil.decryptPass(passEncryptUtil.encryptPass("123456")));
+        passEncryptUtil.setSecretKey(LoginType.USER.getValue() + "leaf4");
+        log.info(passEncryptUtil.encryptPass("123456"));
     }
 
     @Test
