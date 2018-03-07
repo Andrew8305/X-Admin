@@ -16,7 +16,8 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AdminRegisterInfoForm {
+public class AdminRegisterForm {
+    private String id;
     private String name;
     private String pass;
     private String phone;

@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @author leaf
- * <p>date: 2018-02-08 18:51</p>
+ * <p>date: 2018-03-06 20:20</p>
  * <p>version: 1.0</p>
  */
 @Builder
@@ -16,8 +16,12 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UserRegisterInfoForm {
+public class DictionaryInfoSubmitForm {
+    private Long id;
+    private Integer code;
     private String name;
-    private String pass;
-    private String phone;
+    private Integer status;
+    private Integer asc;
+    private String desc;
+    private Long dictionaryType;
 }
