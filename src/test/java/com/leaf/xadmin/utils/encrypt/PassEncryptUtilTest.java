@@ -22,13 +22,13 @@ public class PassEncryptUtilTest {
 
     @Test
     public void decryptPass() throws Exception {
-        passEncryptUtil.setSecretKey(LoginType.USER.getType() + "xbc");
+        passEncryptUtil.setSecretKey(LoginType.USER.getValue() + "xbc");
         log.info(passEncryptUtil.decryptPass(passEncryptUtil.encryptPass("123456")));
     }
 
     @Test
     public void encryptPass() throws Exception {
-        passEncryptUtil.setSecretKey(LoginType.ADMIN.getType() + "admin");
+        passEncryptUtil.setSecretKey(LoginType.ADMIN.getValue() + "admin");
         log.info(passEncryptUtil.encryptPass("123456"));
     }
 
