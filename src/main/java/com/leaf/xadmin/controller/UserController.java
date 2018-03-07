@@ -1,13 +1,15 @@
 package com.leaf.xadmin.controller;
 
-import com.leaf.xadmin.vo.enums.LoginType;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.leaf.xadmin.common.shiro.token.ExtendedUsernamePasswordToken;
-import com.leaf.xadmin.vo.ResponseResultVO;
+import com.leaf.xadmin.constants.GlobalConstants;
 import com.leaf.xadmin.entity.User;
 import com.leaf.xadmin.service.IUserService;
 import com.leaf.xadmin.utils.jwt.JwtUtil;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;
-import com.leaf.xadmin.vo.form.UserRegisterInfoForm;
+import com.leaf.xadmin.vo.ResponseResultVO;
+import com.leaf.xadmin.vo.enums.LoginType;
+import com.leaf.xadmin.vo.form.UserRegisterForm;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -42,8 +44,9 @@ public class UserController {
         String loginToken; // 登录凭证
         Subject subject = SecurityUtils.getSubject();
         if (!subject.isAuthenticated()) {
-            ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.USER.getType());
+            ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.USER.getValue());
             subject.login(token);
+            subject.getSession().setAttribute(GlobalConstants.SESSION_LOGIN_TYPE_KEY, LoginType.USER.getValue());
             User user = userService.queryOneByName(name);
             loginToken = JwtUtil.generateToken(user.getId(), name, user.getPass());
             // token写入cookie
@@ -66,10 +69,10 @@ public class UserController {
     }
 
     @ApiOperation(value = "用户注册")
-    @PostMapping(value = "register")
-    public ResponseResultVO register(@Valid UserRegisterInfoForm registerInfoVO) {
+    @PutMapping(value = "register")
+    public ResponseResultVO register(@Valid UserRegisterForm userRegisterForm) {
         User user = User.builder().build();
-        BeanUtils.copyProperties(registerInfoVO, user);
+        BeanUtils.copyProperties(userRegisterForm, user);
         return ResponseResultUtil.success(userService.addOne(user));
     }
 
@@ -85,21 +88,29 @@ public class UserController {
         return ResponseResultUtil.success(userService.queryOneByName(name));
     }
 
-    @ApiOperation(value = "获取全部用户信息")
+    @ApiOperation(value = "获取全部用户列表")
     @GetMapping(value = "getAll")
-    public ResponseResultVO getAll() {
-        return ResponseResultUtil.success(userService.queryList());
+    public ResponseResultVO getAll(@RequestParam("current") int current,
+                                   @RequestParam("size") int size) {
+        Page<User> page = new Page<>(current, size);
+        return ResponseResultUtil.success(userService.queryList(page));
     }
 
-    @ApiOperation(value = "获取指定类型用户信息列表")
+    @ApiOperation(value = "获取指定类型用户列表")
     @GetMapping(value = "getListByType")
-    public ResponseResultVO getListByType(@RequestParam("type") Integer type) {
-        return ResponseResultUtil.success(userService.queryListByType(type));
+    public ResponseResultVO getListByType(@RequestParam("current") int current,
+                                          @RequestParam("size") int size,
+                                          @RequestParam("type") Integer type) {
+        Page<User> page = new Page<>(current, size);
+        return ResponseResultUtil.success(userService.queryListByType(page, type));
     }
 
-    @ApiOperation(value = "获取指定状态用户信息列表")
+    @ApiOperation(value = "获取指定状态用户列表")
     @GetMapping(value = "getListByStatus")
-    public ResponseResultVO getListByStatus(@RequestParam("status") Integer status) {
-        return ResponseResultUtil.success(userService.queryListByStatus(status));
+    public ResponseResultVO getListByStatus(@RequestParam("current") int current,
+                                            @RequestParam("size") int size,
+                                            @RequestParam("status") Integer status) {
+        Page<User> page = new Page<>(current, size);
+        return ResponseResultUtil.success(userService.queryListByStatus(page, status));
     }
 }

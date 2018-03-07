@@ -1,14 +1,18 @@
 package com.leaf.xadmin.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.Permission;
 import com.leaf.xadmin.entity.Resource;
 import com.leaf.xadmin.entity.Role;
+import com.leaf.xadmin.entity.User;
 import com.leaf.xadmin.mapper.primary.ResourceMapper;
 import com.leaf.xadmin.service.IResourceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +37,17 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
     @Override
     public Resource queryOneByPath(String path) {
-        return baseMapper.selectOne(Resource.builder().path(path).build());
+        return selectOne(new EntityWrapper<Resource>().eq("path", path));
+    }
+
+    @Override
+    public Page<Resource> queryList(Page<Resource> page) {
+        return page.setRecords(selectList(new EntityWrapper<>()));
+    }
+
+    @Override
+    public Resource queryOneById(Serializable id) {
+        return selectById(id);
     }
 
     @Override
@@ -44,5 +58,10 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     @Override
     public Set<Permission> queryPermissionsByPath(String path) {
         return baseMapper.selectResourcePermissionsByPath(path);
+    }
+
+    @Override
+    public boolean updateOneById(Resource resource) {
+        return updateById(resource);
     }
 }

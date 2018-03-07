@@ -18,5 +18,5 @@ public interface IAccountService extends IService<Account> {
      * @param account
      * @return
      */
-    Serializable addOne(Account account);
+    boolean addOne(Account account);
 }

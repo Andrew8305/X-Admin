@@ -23,7 +23,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @param pass
      * @return
      */
-    User selectUserByNameAndPass(@Param("name") String name, @Param("pass") String pass);
+    User selectOneByNameAndPass(@Param("name") String name, @Param("pass") String pass);
 
     /**
      * 查询指定用户名用户
@@ -31,7 +31,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @param name
      * @return
      */
-    User selectUserByName(String name);
+    User selectOneByName(String name);
 
     /**
      * 查询指定id用户
@@ -39,14 +39,14 @@ public interface UserMapper extends BaseMapper<User> {
      * @param id
      * @return
      */
-    User selectUserById(String id);
+    User selectOneById(String id);
 
     /**
      * 查询所有用户列表
      *
      * @return
      */
-    List<User> selectAllUsers();
+    List<User> selectAll();
 
     /**
      * 查询指定状态用户列表
@@ -54,5 +54,5 @@ public interface UserMapper extends BaseMapper<User> {
      * @param status
      * @return
      */
-    List<User> selectStatusUsers(Integer status);
+    List<User> selectListByStatus(Integer status);
 }

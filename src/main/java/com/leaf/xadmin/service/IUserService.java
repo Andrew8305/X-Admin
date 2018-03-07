@@ -1,10 +1,10 @@
 package com.leaf.xadmin.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.leaf.xadmin.entity.User;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author leaf
@@ -18,7 +18,7 @@ public interface IUserService extends IService<User> {
      * @param user
      * @return
      */
-    Serializable addOne(User user);
+    boolean addOne(User user);
 
     /**
      * 用户登出(清理自定义缓存信息)
@@ -47,24 +47,27 @@ public interface IUserService extends IService<User> {
     /**
      * 查询用户列表
      *
+     * @param page
      * @return
      */
-    List<User> queryList();
+    Page<User> queryList(Page<User> page);
 
     /**
      * 查询指定类型用户列表
      *
+     * @param page
      * @param type
      * @return
      */
-    List<User> queryListByType(Integer type);
+    Page<User> queryListByType(Page<User> page, Integer type);
 
     /**
      * 查询指定状态用户列表
      *
+     * @param page
      * @param status
      * @return
      */
-    List<User> queryListByStatus(Integer status);
+    Page<User> queryListByStatus(Page<User> page, Integer status);
 
 }

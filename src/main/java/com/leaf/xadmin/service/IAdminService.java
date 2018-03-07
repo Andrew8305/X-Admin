@@ -1,11 +1,16 @@
 package com.leaf.xadmin.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
+import com.google.common.collect.Lists;
 import com.leaf.xadmin.entity.Admin;
+import com.leaf.xadmin.vo.enums.LoginType;
+import io.swagger.models.auth.In;
 import org.apache.shiro.session.Session;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author leaf
@@ -19,7 +24,33 @@ public interface IAdminService extends IService<Admin> {
      * @param name
      * @return
      */
-    Admin queryOne(String name);
+    Admin queryOneByName(String name);
+
+    /**
+     * 查询管理员列表
+     *
+     * @param page
+     * @return
+     */
+    Page<Admin> queryList(Page<Admin> page);
+
+    /**
+     * 查询指定类型管理员
+     *
+     * @param page
+     * @param type
+     * @return
+     */
+    Page<Admin> queryListByType(Page<Admin> page, Integer type);
+
+    /**
+     * 查询指定状态管理员
+     *
+     * @param page
+     * @param status
+     * @return
+     */
+    Page<Admin> queryListByStatus(Page<Admin> page, Integer status);
 
     /**
      * 添加管理员
@@ -27,14 +58,16 @@ public interface IAdminService extends IService<Admin> {
      * @param admin
      * @return
      */
-    Serializable addOne(Admin admin);
+    boolean addOne(Admin admin);
 
     /**
-     * 获取存活session
+     * 获取管理员session
      *
+     * @param page
+     * @param loginType
      * @return
      */
-    Collection<Session> queryActiveSessions();
+    Page<Session> querySessionsByLoginType(Page<Session> page, LoginType loginType);
 
     /**
      * 强制用户下线

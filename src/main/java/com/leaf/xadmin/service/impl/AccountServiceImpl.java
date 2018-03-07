@@ -23,17 +23,15 @@ import java.io.Serializable;
 public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements IAccountService {
 
     @Override
-    public Serializable addOne(Account account) {
-        String id = null;
+    public boolean addOne(Account account) {
         if (!ObjectUtils.isEmpty(account) && !StringUtils.isEmpty(account.getId())) {
             Account selectOne = baseMapper.selectOne(Account.builder().id(account.getId()).build());
             if (selectOne != null) {
                 throw new GlobalException(ErrorStatus.ACCOUNT_EXIST_ERROR);
             }
-            id = account.getId();
-            baseMapper.insert(account);
+            return insert(account);
         }
-        return id;
+        return false;
     }
 
 }

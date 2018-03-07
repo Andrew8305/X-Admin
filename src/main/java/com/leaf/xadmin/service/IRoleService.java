@@ -1,8 +1,10 @@
 package com.leaf.xadmin.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.leaf.xadmin.entity.Role;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -26,4 +28,53 @@ public interface IRoleService extends IService<Role> {
      * @return
      */
     List<Role> queryAdminRoles(String name);
+
+    /**
+     * 添加角色
+     *
+     * @param role
+     * @return
+     */
+    boolean addOne(Role role);
+
+    /**
+     * 批量添加角色
+     *
+     * @param roleList
+     * @return
+     */
+    boolean addBatch(List<Role> roleList);
+
+    /**
+     * 查询角色列表
+     *
+     * @param page
+     * @return
+     */
+    Page<Role> queryList(Page<Role> page);
+
+    /**
+     * 查询指定角色信息
+     *
+     * @param id
+     * @return
+     */
+    Role queryOneById(Serializable id);
+
+    /**
+     * 查询指定名称角色
+     *
+     * @param name
+     * @return
+     */
+    Role queryOneByName(String name);
+
+    /**
+     * 更新角色信息
+     *
+     * @param role
+     * @return
+     */
+    boolean updateOneById(Role role);
+
 }

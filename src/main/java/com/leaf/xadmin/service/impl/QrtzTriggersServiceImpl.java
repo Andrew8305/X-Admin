@@ -20,6 +20,6 @@ import java.util.List;
 public class QrtzTriggersServiceImpl extends ServiceImpl<QrtzTriggersMapper, QrtzTriggers> implements IQrtzTriggersService {
     @Override
     public List<QrtzTriggers> queryList() {
-        return baseMapper.selectList(new EntityWrapper<>());
+        return selectList(new EntityWrapper<>());
     }
 }

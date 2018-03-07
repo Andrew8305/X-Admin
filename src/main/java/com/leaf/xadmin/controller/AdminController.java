@@ -1,5 +1,6 @@
 package com.leaf.xadmin.controller;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.leaf.xadmin.constants.GlobalConstants;
 import com.leaf.xadmin.entity.Admin;
 import com.leaf.xadmin.entity.Resource;
@@ -12,11 +13,12 @@ import com.leaf.xadmin.utils.request.RequestMappingResolveUtil;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;
 import com.leaf.xadmin.vo.RequestResourceVO;
 import com.leaf.xadmin.vo.ResponseResultVO;
-import com.leaf.xadmin.vo.form.AdminRegisterInfoForm;
+import com.leaf.xadmin.vo.form.AdminRegisterForm;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,22 +44,18 @@ import java.util.*;
 public class AdminController {
 
     @Autowired
-    private RequestMappingHandlerMapping requestMappingHandlerMapping;
-    @Autowired
-    private RequestMappingResolveUtil requestMappingResolveUtil;
-    @Autowired
     private IAdminService adminService;
-    @Autowired
-    private IResourceService resourceService;
 
     @ApiOperation(value = "管理员登录")
     @PostMapping(value = "login")
     public ResponseResultVO login(@RequestParam("name") String name, @RequestParam("pass") String pass) {
         Subject subject = SecurityUtils.getSubject();
         if (!subject.isAuthenticated()) {
-            ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.ADMIN.getType());
+            ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.ADMIN.getValue());
             subject.login(token);
-            Admin admin = adminService.queryOne(name);
+            // 添加登录类型标识
+            subject.getSession().setAttribute(GlobalConstants.SESSION_LOGIN_TYPE_KEY, LoginType.ADMIN.getValue());
+            Admin admin = adminService.queryOneByName(name);
             AdminInfoDTO adminInfoDTO = AdminInfoDTO.builder().build();
             BeanUtils.copyProperties(admin, adminInfoDTO);
             return ResponseResultUtil.success(adminInfoDTO);
@@ -77,17 +75,27 @@ public class AdminController {
     }
 
     @ApiOperation(value = "管理员注册")
-    @PostMapping(value = "register")
-    public ResponseResultVO register(@Valid AdminRegisterInfoForm adminRegisterInfoForm) {
+    @PutMapping(value = "register")
+    public ResponseResultVO register(@Valid AdminRegisterForm adminRegisterForm) {
         Admin admin = Admin.builder().build();
-        BeanUtils.copyProperties(adminRegisterInfoForm, admin);
+        BeanUtils.copyProperties(adminRegisterForm, admin);
         return ResponseResultUtil.success(adminService.addOne(admin));
     }
 
-    @ApiOperation(value = "获取在线登陆会话信息")
-    @PostMapping(value = "getOnline")
-    public ResponseResultVO getOnline() {
-        return ResponseResultUtil.success(adminService.queryActiveSessions());
+    @ApiOperation(value = "获取管理员在线会话列表")
+    @GetMapping(value = "getAdminSessions")
+    public ResponseResultVO getAdminSessions(@RequestParam("current") int current,
+                                      @RequestParam("size") int size) {
+        Page<Session> page = new Page<>(current, size);
+        return ResponseResultUtil.success(adminService.querySessionsByLoginType(page, LoginType.ADMIN));
+    }
+
+    @ApiOperation(value = "获取用户在线会话信息列表")
+    @GetMapping(value = "getUserSessions")
+    public ResponseResultVO getUserSessions(@RequestParam("current") int current,
+                                      @RequestParam("size") int size) {
+        Page<Session> page = new Page<>(current, size);
+        return ResponseResultUtil.success(adminService.querySessionsByLoginType(page, LoginType.USER));
     }
 
     @ApiOperation(value = "强制指定用户下线")
@@ -102,22 +110,31 @@ public class AdminController {
         return ResponseResultUtil.success(adminService.clearAuthorsByName(name));
     }
 
-    @ApiOperation(value = "持久化资源列表")
-    @PostMapping(value = "scanAllResources")
-    public ResponseResultVO scanAllResources() {
-        List<Resource> resourceList = new ArrayList<>();
-        Map<RequestMappingInfo, HandlerMethod> map = requestMappingHandlerMapping.getHandlerMethods();
-        for (Map.Entry<RequestMappingInfo, HandlerMethod> m : map.entrySet()) {
-            for (String next : m.getKey().getPatternsCondition().getPatterns()) {
-                if (PatternMatchUtils.simpleMatch(GlobalConstants.REQUEST_PATH_PATTERN_MATH, next)) {
-                    HandlerMethod method = m.getValue();
-                    List<RequestResourceVO> requestResourceVOS = requestMappingResolveUtil.methodResolver(method.getMethod());
-                    Resource resource = RequestMappingResolveUtil.pathMergeUpgrade(requestResourceVOS);
-                    resourceList.add(resource);
-                }
-            }
-        }
-
-        return ResponseResultUtil.success(resourceService.addBatch(resourceList));
+    @ApiOperation(value = "查询所有管理员")
+    @GetMapping(value = "getAll")
+    public ResponseResultVO getAll(@RequestParam("current") int current,
+                                   @RequestParam("size") int size) {
+        Page<Admin> page = new Page<>(current, size);
+        return ResponseResultUtil.success(adminService.queryList(page));
     }
+
+    @ApiOperation(value = "查询指定类型管理员列表")
+    @GetMapping(value = "getListByType")
+    public ResponseResultVO getAllByType(@RequestParam("current") int current,
+                                   @RequestParam("size") int size,
+                                   @RequestParam("type") int type) {
+        Page<Admin> page = new Page<>(current, size);
+        return ResponseResultUtil.success(adminService.queryListByType(page, type));
+    }
+
+    @ApiOperation(value = "查询指定状态管理员列表")
+    @GetMapping(value = "getListByStatus")
+    public ResponseResultVO getAllStatus(@RequestParam("current") int current,
+                                         @RequestParam("size") int size,
+                                         @RequestParam("status") int status) {
+        Page<Admin> page = new Page<>(current, size);
+        return ResponseResultUtil.success(adminService.queryListByStatus(page, status));
+    }
+
+
 }

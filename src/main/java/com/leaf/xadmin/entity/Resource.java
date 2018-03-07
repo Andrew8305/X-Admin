@@ -1,5 +1,6 @@
 package com.leaf.xadmin.entity;
 
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +25,8 @@ public class Resource {
     private String desc;
     private String path;
     private Integer type;
+    @TableLogic
+    private Integer deleteFlag;
     private Date createTime;
     private Date updateTime;
 }

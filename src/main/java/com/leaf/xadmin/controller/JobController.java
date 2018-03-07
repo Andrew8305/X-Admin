@@ -23,7 +23,7 @@ public class JobController {
     private IQuartzService quartzService;
 
     @ApiOperation(value = "添加任务")
-    @PostMapping(value = "add")
+    @PutMapping(value = "add")
     public void add(@RequestParam(value = "jobClassName")String jobClassName,
                     @RequestParam(value = "jobGroupName")String jobGroupName,
                     @RequestParam(value = "cronExpression")String cronExpression) {
@@ -31,7 +31,7 @@ public class JobController {
     }
 
     @ApiOperation(value = "删除任务")
-    @PostMapping(value = "delete")
+    @DeleteMapping(value = "delete")
     public void delete(@RequestParam(value = "jobClassName")String jobClassName,
                     @RequestParam(value = "jobGroupName")String jobGroupName) {
         quartzService.delete(jobClassName, jobGroupName);

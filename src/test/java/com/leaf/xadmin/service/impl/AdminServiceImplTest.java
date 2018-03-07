@@ -1,6 +1,6 @@
 package com.leaf.xadmin.service.impl;
 
-import com.leaf.xadmin.config.datasource.DataSourceContextHolder;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.leaf.xadmin.entity.Admin;
 import com.leaf.xadmin.service.IAdminService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,14 @@ public class AdminServiceImplTest {
 
     @Test
     public void queryOne() {
-        Admin admin = adminService.queryOne("admin");
+        Admin admin = adminService.queryOneByName("admin");
         assertNotNull(admin);
+    }
+
+    @Test
+    public void queryList() {
+        Page<Admin> page = new Page<>();
+        page = adminService.queryList(page);
+        log.info("分页信息:{}", page.toString());
     }
 }

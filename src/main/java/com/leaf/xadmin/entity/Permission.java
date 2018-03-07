@@ -1,5 +1,6 @@
 package com.leaf.xadmin.entity;
 
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,8 @@ public class Permission {
     private Long id;
     private String name;
     private String desc;
+    @TableLogic
+    private Integer deleteFlag;
     private Date createTime;
     private Date updateTime;
 }

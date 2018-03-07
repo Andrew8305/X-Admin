@@ -1,10 +1,12 @@
 package com.leaf.xadmin.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.leaf.xadmin.entity.Permission;
 import com.leaf.xadmin.entity.Resource;
 import com.leaf.xadmin.entity.Role;
 
+import java.io.Serializable;
 import java.sql.SQLDataException;
 import java.util.List;
 import java.util.Set;
@@ -42,6 +44,23 @@ public interface IResourceService extends IService<Resource> {
     Resource queryOneByPath(String path);
 
     /**
+     * 查询资源列表
+     *
+     * @param page
+     * @return
+     */
+    Page<Resource> queryList(Page<Resource> page);
+
+    /**
+     * 查询指定id资源信息
+     *
+     * @param id
+     * @return
+     */
+    Resource queryOneById(Serializable id);
+
+
+    /**
      * 根据路径查询角色信息列表
      *
      * @param path
@@ -56,4 +75,12 @@ public interface IResourceService extends IService<Resource> {
      * @return
      */
     Set<Permission> queryPermissionsByPath(String path);
+
+    /**
+     * 更新资源信息
+     *
+     * @param resource
+     * @return
+     */
+    boolean updateOneById(Resource resource);
 }

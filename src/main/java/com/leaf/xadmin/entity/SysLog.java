@@ -1,5 +1,6 @@
 package com.leaf.xadmin.entity;
 
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class SysLog {
     private String desc;
     private Integer type;
     private Integer status;
+    @TableLogic
+    private Integer deleteFlag;
     private Date createTime;
     private Date updateTime;
 }

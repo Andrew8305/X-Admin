@@ -11,17 +11,21 @@ import java.util.Date;
 
 /**
  * @author leaf
- * <p>date: 2018-01-03 13:27</p>
+ * <p>date: 2018-03-06 15:11</p>
+ * <p>version: 1.0</p>
  */
 @Builder
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Role {
+public class Attachment {
     private Long id;
     private String name;
-    private String desc;
+    private String oldName;
+    private Long size;
+    private Integer type;
+    private String pathPrefix;
     @TableLogic
     private Integer deleteFlag;
     private Date createTime;

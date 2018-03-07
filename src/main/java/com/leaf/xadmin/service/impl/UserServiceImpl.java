@@ -1,17 +1,18 @@
 package com.leaf.xadmin.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.Account;
 import com.leaf.xadmin.entity.User;
-import com.leaf.xadmin.vo.enums.ErrorStatus;
-import com.leaf.xadmin.vo.enums.LoginType;
-import com.leaf.xadmin.vo.exception.GlobalException;
 import com.leaf.xadmin.mapper.primary.UserMapper;
 import com.leaf.xadmin.service.IAccountService;
 import com.leaf.xadmin.service.IUserService;
 import com.leaf.xadmin.utils.encrypt.PassEncryptUtil;
 import com.leaf.xadmin.utils.generator.SnowflakeUtil;
+import com.leaf.xadmin.vo.enums.ErrorStatus;
+import com.leaf.xadmin.vo.enums.LoginType;
+import com.leaf.xadmin.vo.exception.GlobalException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -40,8 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private IAccountService accountService;
 
     @Override
-    public Serializable addOne(User user) {
-        String id = null;
+    public boolean addOne(User user) {
         Random random = new Random();
         SnowflakeUtil idWorker = new SnowflakeUtil(random.nextInt(31), random.nextInt(31));
 
@@ -51,25 +50,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 throw new GlobalException(ErrorStatus.ACCOUNT_EXIST_ERROR);
             }
             // 生成id
-            id = String.valueOf(idWorker.nextId());
+            String id = String.valueOf(idWorker.nextId());
             // 设置密钥
-            passEncryptUtil.setSecretKey(LoginType.USER.getType() + user.getName());
+            passEncryptUtil.setSecretKey(LoginType.USER.getValue() + user.getName());
             user.setId(id);
             user.setPass(passEncryptUtil.encryptPass(user.getPass()));
-            if (baseMapper.insert(user).equals(1)) {
+            if (insert(user)) {
                 Account account = Account.builder()
                         .id(id)
                         .email(user.getEmail())
                         .phone(user.getPhone())
                         .nickname(user.getName())
                         .build();
-                accountService.addOne(account);
+                return accountService.addOne(account);
             } else {
                 throw new GlobalException(ErrorStatus.SQL_EXECUTE_ERROR);
             }
         }
 
-        return id;
+        return false;
 
     }
 
@@ -79,28 +78,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     
     @Override
     public User queryOneById(String id) {
-        return baseMapper.selectUserById(id);
+        return selectById(id);
     }
 
     @Cacheable(key = "#p0")
     @Override
     public User queryOneByName(String name) {
-        return baseMapper.selectUserByName(name);
+        return selectOne(new EntityWrapper<User>().eq("name", name));
     }
 
     @Override
-    public List<User> queryList() {
-        return baseMapper.selectAllUsers();
+    public Page<User> queryList(Page<User> page) {
+        return page.setRecords(selectList(new EntityWrapper<>()));
     }
 
     @Override
-    public List<User> queryListByType(Integer type) {
-        return baseMapper.selectList(new EntityWrapper<User>().eq("type", type));
+    public Page<User> queryListByType(Page<User> page, Integer type) {
+        return page.setRecords(selectList(new EntityWrapper<User>().eq("type", type)));
     }
 
     @Override
-    public List<User> queryListByStatus(Integer status) {
-        return baseMapper.selectList(new EntityWrapper<User>().eq("status", status));
-
+    public Page<User> queryListByStatus(Page<User> page, Integer status) {
+        return page.setRecords(selectList(new EntityWrapper<User>().eq("status", status)));
     }
 }

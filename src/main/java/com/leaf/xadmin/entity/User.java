@@ -1,5 +1,6 @@
 package com.leaf.xadmin.entity;
 
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +30,8 @@ public class User {
     private Date lastLoginTime;
     private String lastLoginIp;
     private String lastLoginLocal;
+    @TableLogic
+    private Integer deleteFlag;
     private Date createTime;
     private Date updateTime;
 }
