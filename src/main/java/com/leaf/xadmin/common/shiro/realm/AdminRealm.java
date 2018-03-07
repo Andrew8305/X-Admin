@@ -91,7 +91,7 @@ public class AdminRealm extends AuthorizingRealm {
         // 获取管理员名
         String name = (String) authenticationToken.getPrincipal();
         // 查找管理员信息
-        Admin admin = adminService.queryOne(name);
+        Admin admin = adminService.queryOneByName(name);
         if (admin != null) {
             // 判断管理员帐户是否被锁定
             if (!admin.getStatus().equals(AdminStatus.NORMAL.getCode())) {

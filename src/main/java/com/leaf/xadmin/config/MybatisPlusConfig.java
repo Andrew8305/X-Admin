@@ -58,6 +58,7 @@ public class MybatisPlusConfig {
         globalConfiguration.setRefresh(true);
         globalConfiguration.setLogicDeleteValue("0");
         globalConfiguration.setLogicNotDeleteValue("1");
+        globalConfiguration.setSqlInjector(new LogicSqlInjector());
         sqlSessionFactory.setGlobalConfig(globalConfiguration);
         return sqlSessionFactory.getObject();
     }
