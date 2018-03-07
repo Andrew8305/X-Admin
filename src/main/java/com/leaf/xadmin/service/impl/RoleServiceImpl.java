@@ -57,8 +57,21 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    public boolean updateOneById(Role role) {
+    public boolean updateOne(Role role) {
         return updateById(role);
+    }
+
+    @Override
+    public boolean deleteOne(Serializable id) {
+        // 解除角色相关依赖
+        baseMapper.deleteAdminRoleDeps(id);
+        baseMapper.deleteResourceRoleDeps(id);
+        baseMapper.deleteUserRoleDeps(id);
+        baseMapper.deletePermRoleDeps(id);
+
+        // TODO 强制系统相关权限刷新
+
+        return deleteById(id);
     }
 
 }

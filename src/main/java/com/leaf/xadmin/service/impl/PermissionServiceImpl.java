@@ -57,7 +57,18 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     }
 
     @Override
-    public boolean updateOneById(Permission role) {
+    public boolean updateOne(Permission role) {
         return updateById(role);
+    }
+
+    @Override
+    public boolean deleteOne(Serializable id) {
+        // 删除权限相关依赖
+        baseMapper.deletePermResourceDeps(id);
+        baseMapper.deletePermRoleDeps(id);
+
+        // TODO 强制系统权限刷新
+
+        return deleteById(id);
     }
 }

@@ -5,6 +5,26 @@
         r.id, r.name, r.desc, r.create_time, r.update_time
     </sql>
 
+    <delete id="deleteAdminRoleDeps">
+      DELETE FROM admin_role
+      WHERE role_id = #{id}
+    </delete>
+
+    <delete id="deleteUserRoleDeps">
+        DELETE FROM user_role
+        WHERE role_id = #{id}
+    </delete>
+
+    <delete id="deleteResourceRoleDeps">
+        DELETE FROM resource_role
+        WHERE role_id = #{id}
+    </delete>
+
+    <delete id="deletePermRoleDeps">
+      DELETE FROM role_permission
+      WHERE role_id = #{id}
+    </delete>
+
     <select id="selectUserRoles" resultType="com.leaf.xadmin.entity.Role">
         SELECT <include refid="ROLE_COLS" />
         FROM user u

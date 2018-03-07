@@ -75,6 +75,16 @@
         DELETE FROM resource_perm WHERE resource_id = #{resourceId} AND permission_id = #{permissionId}
     </delete>
 
+    <delete id="deleteResourceRoleDeps">
+        DELETE FROM resource_role
+        WHERE resource_id = #{id}
+    </delete>
+
+    <delete id="deleteResourcePermDeps">
+        DELETE FROM resource_perm
+        WHERE resource_id = #{id}
+    </delete>
+
     <select id="selectResourceRoles" resultType="com.leaf.xadmin.entity.Role">
       SELECT <include refid="ROLE_COLS" />
       FROM resource r

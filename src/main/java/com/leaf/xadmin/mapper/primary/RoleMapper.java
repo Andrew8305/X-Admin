@@ -2,9 +2,11 @@ package com.leaf.xadmin.mapper.primary;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.leaf.xadmin.entity.Role;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -30,4 +32,36 @@ public interface RoleMapper extends BaseMapper<Role> {
      * @return
      */
     List<Role> selectAdminRoles(String name);
+
+    /**
+     * 删除管理员角色相关依赖
+     *
+     * @param id
+     * @return
+     */
+    Integer deleteAdminRoleDeps(Serializable id);
+
+    /**
+     * 删除用户角色相关依赖
+     *
+     * @param id
+     * @return
+     */
+    Integer deleteUserRoleDeps(Serializable id);
+
+    /**
+     * 删除资源角色相关依赖
+     *
+     * @param id
+     * @return
+     */
+    Integer deleteResourceRoleDeps(Serializable id);
+
+    /**
+     * 删除权限角色依赖
+     *
+     * @param id
+     * @return
+     */
+    Integer deletePermRoleDeps(Serializable id);
 }

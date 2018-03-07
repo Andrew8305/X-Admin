@@ -75,6 +75,14 @@ public interface IRoleService extends IService<Role> {
      * @param role
      * @return
      */
-    boolean updateOneById(Role role);
+    boolean updateOne(Role role);
+
+    /**
+     * 删除角色
+     *
+     * @param id
+     * @return
+     */
+    boolean deleteOne(Serializable id);
 
 }

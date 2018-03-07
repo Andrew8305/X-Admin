@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -96,4 +97,20 @@ public interface ResourceMapper extends BaseMapper<Resource> {
      * @return
      */
     Set<Permission> selectResourcePermissionsByPath(String path);
+
+    /**
+     * 删除资源权限依赖
+     *
+     * @param id
+     * @return
+     */
+    Integer deleteResourcePermDeps(Serializable id);
+
+    /**
+     * 删除资源角色依赖
+     *
+     * @param id
+     * @return
+     */
+    Integer deleteResourceRoleDeps(Serializable id);
 }

@@ -82,5 +82,13 @@ public interface IResourceService extends IService<Resource> {
      * @param resource
      * @return
      */
-    boolean updateOneById(Resource resource);
+    boolean updateOne(Resource resource);
+
+    /**
+     * 删除资源信息
+     *
+     * @param id
+     * @return
+     */
+    boolean deleteOne(Serializable id);
 }

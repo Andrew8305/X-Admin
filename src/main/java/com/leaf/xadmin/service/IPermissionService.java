@@ -62,7 +62,7 @@ public interface IPermissionService extends IService<Permission> {
     Permission queryOneById(Serializable id);
 
     /**
-     * 查询指定名称角色
+     * 查询指定名称权限
      *
      * @param name
      * @return
@@ -70,10 +70,18 @@ public interface IPermissionService extends IService<Permission> {
     Permission queryOneByName(String name);
 
     /**
-     * 更新角色信息
+     * 更新权限信息
      *
      * @param role
      * @return
      */
-    boolean updateOneById(Permission role);
+    boolean updateOne(Permission role);
+
+    /**
+     * 删除权限
+     *
+     * @param id
+     * @return
+     */
+    boolean deleteOne(Serializable id);
 }

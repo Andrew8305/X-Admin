@@ -51,7 +51,7 @@ public class PermissionController {
     public ResponseResultVO update(@Valid PermissionSubmitForm permissionSubmitForm) {
         Permission permission = Permission.builder().build();
         BeanUtils.copyProperties(permissionSubmitForm, permission);
-        return ResponseResultUtil.success(permissionService.updateOneById(permission));
+        return ResponseResultUtil.success(permissionService.updateOne(permission));
     }
 
 }

@@ -76,6 +76,6 @@ public class ResourceController {
     public ResponseResultVO update(@Valid ResourceSubmitForm resourceSubmitForm) {
         Resource resource = Resource.builder().build();
         BeanUtils.copyProperties(resourceSubmitForm, resource);
-        return ResponseResultUtil.success(resourceService.updateOneById(resource));
+        return ResponseResultUtil.success(resourceService.updateOne(resource));
     }
 }

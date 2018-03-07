@@ -5,6 +5,7 @@ import com.leaf.xadmin.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -30,4 +31,20 @@ public interface PermissionMapper extends BaseMapper<Permission> {
      * @return
      */
     List<Permission> selectAdminPermissions(String name);
+
+    /**
+     * 删除权限资源依赖
+     *
+     * @param id
+     * @return
+     */
+    Integer deletePermResourceDeps(Serializable id);
+
+    /**
+     * 删除权限角色依赖
+     *
+     * @param id
+     * @return
+     */
+    Integer deletePermRoleDeps(Serializable id);
 }

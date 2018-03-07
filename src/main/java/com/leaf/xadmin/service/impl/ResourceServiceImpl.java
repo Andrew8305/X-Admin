@@ -61,7 +61,18 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    public boolean updateOneById(Resource resource) {
+    public boolean updateOne(Resource resource) {
         return updateById(resource);
+    }
+
+    @Override
+    public boolean deleteOne(Serializable id) {
+        // 删除资源相关依赖
+        baseMapper.deleteResourcePermDeps(id);
+        baseMapper.deleteResourceRoleDeps(id);
+
+        // TODO　强制系统相关权限刷新
+
+        return deleteById(id);
     }
 }

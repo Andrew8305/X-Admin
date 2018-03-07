@@ -5,6 +5,16 @@
         p.id, p.name, p.desc, p.create_time, p.update_time
     </sql>
 
+    <delete id="deletePermResourceDeps">
+        DELETE FROM resource_perm
+        WHERE permission_id = #{id}
+    </delete>
+
+    <delete id="deletePermRoleDeps">
+        DELETE FROM role_permission
+        WHERE permission_id = #{id}
+    </delete>
+
     <select id="selectUserPermissions" resultType="com.leaf.xadmin.entity.Permission">
         SELECT DISTINCT <include refid="PERMISSION_COLS" />
         FROM user u

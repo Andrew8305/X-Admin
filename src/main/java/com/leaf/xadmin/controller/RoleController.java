@@ -51,6 +51,6 @@ public class RoleController {
     public ResponseResultVO update(@Valid RoleSubmitForm roleSubmitForm) {
         Role role = Role.builder().build();
         BeanUtils.copyProperties(roleSubmitForm, role);
-        return ResponseResultUtil.success(roleService.updateOneById(role));
+        return ResponseResultUtil.success(roleService.updateOne(role));
     }
 }
