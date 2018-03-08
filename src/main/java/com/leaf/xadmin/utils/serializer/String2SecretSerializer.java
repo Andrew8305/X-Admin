@@ -17,6 +17,16 @@ import java.io.IOException;
 public class String2SecretSerializer extends JsonSerializer<String> {
     @Override
     public void serialize(String s, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-        jsonGenerator.writeString(s);
+        jsonGenerator.writeString(secretString(s, 3, 3, '*'));
+    }
+
+    private String secretString(String target, int start, int end, char c) {
+        char[] chars = target.toCharArray();
+        for (int i = 0, length = chars.length; i < length; i++) {
+            if (i >= start && i <= length - (end + 1)) {
+                chars[i] = c;
+            }
+        }
+        return String.valueOf(chars);
     }
 }

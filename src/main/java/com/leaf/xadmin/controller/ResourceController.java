@@ -78,4 +78,10 @@ public class ResourceController {
         BeanUtils.copyProperties(resourceSubmitForm, resource);
         return ResponseResultUtil.success(resourceService.updateOne(resource));
     }
+
+    @ApiOperation(value = "删除角资源信息")
+    @DeleteMapping(value = "delete")
+    public ResponseResultVO delete(@RequestParam("id") String id) {
+        return ResponseResultUtil.success(resourceService.deleteOne(id));
+    }
 }

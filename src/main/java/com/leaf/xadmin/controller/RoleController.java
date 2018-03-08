@@ -53,4 +53,10 @@ public class RoleController {
         BeanUtils.copyProperties(roleSubmitForm, role);
         return ResponseResultUtil.success(roleService.updateOne(role));
     }
+
+    @ApiOperation(value = "删除角色信息")
+    @DeleteMapping(value = "delete")
+    public ResponseResultVO delete(@RequestParam("id") String id) {
+        return ResponseResultUtil.success(roleService.deleteOne(id));
+    }
 }

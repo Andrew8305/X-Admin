@@ -1,5 +1,7 @@
 package com.leaf.xadmin.vo.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.leaf.xadmin.utils.serializer.String2SecretSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +20,7 @@ import lombok.experimental.Accessors;
 @Data
 public class UserInfoDTO {
     private String id;
+    @JsonSerialize(using = String2SecretSerializer.class)
     private String name;
     private String avatar;
 }

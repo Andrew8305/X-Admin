@@ -54,4 +54,10 @@ public class PermissionController {
         return ResponseResultUtil.success(permissionService.updateOne(permission));
     }
 
+    @ApiOperation(value = "删除权限信息")
+    @DeleteMapping(value = "delete")
+    public ResponseResultVO delete(@RequestParam("id") String id) {
+        return ResponseResultUtil.success(permissionService.deleteOne(id));
+    }
+
 }
