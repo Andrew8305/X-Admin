@@ -19,18 +19,18 @@ public interface RoleMapper extends BaseMapper<Role> {
     /**
      * 查询用户角色列表
      *
-     * @param name
+     * @param id
      * @return
      */
-    List<Role> selectUserRoles(String name);
+    List<Role> selectUserRoles(Serializable id);
 
     /**
      * 查询管理员角色列表
      *
-     * @param name
+     * @param id
      * @return
      */
-    List<Role> selectAdminRoles(String name);
+    List<Role> selectAdminRoles(Serializable id);
 
     /**
      * 删除管理员角色相关依赖

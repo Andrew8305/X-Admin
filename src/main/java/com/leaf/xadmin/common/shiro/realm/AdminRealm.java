@@ -62,9 +62,13 @@ public class AdminRealm extends AuthorizingRealm {
         // 获取登录用户名
         String name = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        Admin admin = adminService.queryOneByName(name);
+        if (admin == null) {
+            return null;
+        }
         // 获取用户权限和角色列表
-        List<Role> roles = roleService.queryAdminRoles(name);
-        List<Permission> permissions = permissionService.queryAdminPermissions(name);
+        List<Role> roles = roleService.queryAdminRoles(admin.getId());
+        List<Permission> permissions = permissionService.queryAdminPermissions(admin.getId());
 
         // 加载用户角色列表
         for (Role role : roles) {

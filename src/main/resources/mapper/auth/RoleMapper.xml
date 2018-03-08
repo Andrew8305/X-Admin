@@ -27,19 +27,17 @@
 
     <select id="selectUserRoles" resultType="com.leaf.xadmin.entity.auth.Role">
         SELECT <include refid="ROLE_COLS" />
-        FROM user u
-        RIGHT JOIN user_role ur ON u.id = ur.user_id
-        LEFT JOIN role r ON ur.role_id = r.id
-        WHERE u.name = #{name}
+        FROM user_role ur
+        RIGHT JOIN role r ON ur.role_id = r.id
+        WHERE ur.user_id = #{id}
     </select>
 
 
     <select id="selectAdminRoles" resultType="com.leaf.xadmin.entity.auth.Role">
         SELECT <include refid="ROLE_COLS" />
-        FROM admin a
-        RIGHT JOIN admin_role ar ON a.id = ar.admin_id
-        LEFT JOIN role r ON ar.role_id = r.id
-        WHERE a.name = #{name}
+        FROM admin_role ar
+        RIGHT JOIN role r ON ar.role_id = r.id
+        WHERE ar.admin_id = #{id}
     </select>
 
 </mapper>

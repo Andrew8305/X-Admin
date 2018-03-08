@@ -16,18 +16,18 @@ public interface IRoleService extends IService<Role> {
     /**
      * 查询用户角色列表
      *
-     * @param name
+     * @param id
      * @return
      */
-    List<Role> queryUserRoles(String name);
+    List<Role> queryUserRoles(Serializable id);
 
     /**
      * 查询管理员角色列表
      *
-     * @param name
+     * @param id
      * @return
      */
-    List<Role> queryAdminRoles(String name);
+    List<Role> queryAdminRoles(Serializable id);
 
     /**
      * 添加角色

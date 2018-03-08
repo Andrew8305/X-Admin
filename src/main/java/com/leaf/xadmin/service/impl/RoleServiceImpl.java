@@ -22,13 +22,13 @@ import java.util.List;
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
 
     @Override
-    public List<Role> queryUserRoles(String name) {
-        return baseMapper.selectUserRoles(name);
+    public List<Role> queryUserRoles(Serializable id) {
+        return baseMapper.selectUserRoles(id);
     }
 
     @Override
-    public List<Role> queryAdminRoles(String name) {
-        return baseMapper.selectAdminRoles(name);
+    public List<Role> queryAdminRoles(Serializable id) {
+        return baseMapper.selectAdminRoles(id);
     }
 
     @Override

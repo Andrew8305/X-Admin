@@ -22,7 +22,7 @@ public class PassEncryptUtilTest {
 
     @Test
     public void decryptPass() throws Exception {
-        passEncryptUtil.setSecretKey(LoginType.USER.getValue() + "leaf4");
+        passEncryptUtil.setSecretKey(LoginType.USER.getValue() + "leaf");
         log.info(passEncryptUtil.encryptPass("123456"));
     }
 

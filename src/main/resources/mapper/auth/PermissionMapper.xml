@@ -17,22 +17,20 @@
 
     <select id="selectUserPermissions" resultType="com.leaf.xadmin.entity.auth.Permission">
         SELECT DISTINCT <include refid="PERMISSION_COLS" />
-        FROM user u
-        RIGHT JOIN user_role ur ON u.id = ur.user_id
-        LEFT JOIN role r ON ur.role_id = r.id
-        RIGHT JOIN role_permission rp ON rp.role_id = r.id
-        LEFT JOIN permission p ON p.id = rp.permission_id
-        WHERE u.name = #{name}
+        FROM user_role ur
+        RIGHT JOIN role r ON ur.role_id = r.id
+        LEFT JOIN role_permission rp ON rp.role_id = r.id
+        RIGHT JOIN permission p ON p.id = rp.permission_id
+        WHERE ur.user_id = #{id}
     </select>
 
     <select id="selectAdminPermissions" resultType="com.leaf.xadmin.entity.auth.Permission">
         SELECT DISTINCT <include refid="PERMISSION_COLS" />
-        FROM admin a
-        RIGHT JOIN admin_role ar ON a.id = ar.admin_id
-        LEFT JOIN role r ON ar.role_id = r.id
-        RIGHT JOIN role_permission rp ON rp.role_id = r.id
-        LEFT JOIN permission p ON p.id = rp.permission_id
-        WHERE a.name = #{name}
+        FROM admin_role ar
+        RIGHT JOIN role r ON ar.role_id = r.id
+        LEFT JOIN role_permission rp ON rp.role_id = r.id
+        RIGHT JOIN permission p ON p.id = rp.permission_id
+        WHERE ar.admin_id = #{id}
     </select>
 
 </mapper>

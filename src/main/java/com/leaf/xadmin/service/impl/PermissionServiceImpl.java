@@ -22,13 +22,13 @@ import java.util.List;
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
 
     @Override
-    public List<Permission> queryUserPermissions(String name) {
-        return baseMapper.selectUserPermissions(name);
+    public List<Permission> queryUserPermissions(Serializable id) {
+        return baseMapper.selectUserPermissions(id);
     }
 
     @Override
-    public List<Permission> queryAdminPermissions(String name) {
-        return baseMapper.selectAdminPermissions(name);
+    public List<Permission> queryAdminPermissions(Serializable id) {
+        return baseMapper.selectAdminPermissions(id);
     }
 
     @Override

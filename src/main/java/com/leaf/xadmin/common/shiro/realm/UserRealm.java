@@ -62,9 +62,13 @@ public class UserRealm extends AuthorizingRealm {
         // 获取登录用户名
         String name = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        User user = userService.queryOneByName(name);
+        if (user == null) {
+            return null;
+        }
         // 获取用户权限和角色列表
-        List<Role> roles = roleService.queryUserRoles(name);
-        List<Permission> permissions = permissionService.queryUserPermissions(name);
+        List<Role> roles = roleService.queryUserRoles(user.getId());
+        List<Permission> permissions = permissionService.queryUserPermissions(user.getId());
 
         // 加载用户角色列表
         for (Role role : roles) {

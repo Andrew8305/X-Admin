@@ -36,8 +36,8 @@ public class MybatisPlusConfig {
     public static SqlSessionFactory createSqlSessionFactory(DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
-        sqlSessionFactory.setTypeAliasesPackage("com.leaf.xadmin.entity.*, com.leaf.xadmin.constants");
-        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml"));
+        sqlSessionFactory.setTypeAliasesPackage("com.leaf.xadmin.entity.*");
+        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*/*.xml"));
         sqlSessionFactory.setTypeEnumsPackage("com.leaf.xadmin.vo.enums");
         MybatisConfiguration configuration = new MybatisConfiguration();
         configuration.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);

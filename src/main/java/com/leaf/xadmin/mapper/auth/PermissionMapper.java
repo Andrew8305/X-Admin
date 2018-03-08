@@ -19,18 +19,18 @@ public interface PermissionMapper extends BaseMapper<Permission> {
     /**
      * 查询用户权限列表
      *
-     * @param name
+     * @param id
      * @return
      */
-    List<Permission> selectUserPermissions(String name);
+    List<Permission> selectUserPermissions(Serializable id);
 
     /**
      * 查询管理员权限列表
      *
-     * @param name
+     * @param id
      * @return
      */
-    List<Permission> selectAdminPermissions(String name);
+    List<Permission> selectAdminPermissions(Serializable id);
 
     /**
      * 删除权限资源依赖
