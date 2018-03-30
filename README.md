@@ -58,6 +58,13 @@
     * 管理员信息
     * 权限分配
     
+### 部分演示页面
+![](doc/demo_5.png)<br/>
+![](doc/demo_1.png)<br/>
+![](doc/demo_2.png)<br/>
+![](doc/demo_3.png)<br/>
+![](doc/demo_4.png)<br/>
+
 
 [jdk_1.8]:https://img.shields.io/badge/jdk-1.8-green.svg
 [springboot_1.5.9.RELEASE]:https://img.shields.io/badge/springboot-1.5.9.RELEASE-green.svg
