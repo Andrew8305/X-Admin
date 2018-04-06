@@ -65,14 +65,6 @@ CREATE TABLE resource (
   UNIQUE INDEX uniq_path(path)
 ) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='资源表';
 
--- 资源权限表(关联表)
-DROP TABLE IF EXISTS resource_perm;
-CREATE TABLE resource_perm (
-  `resource_id` VARCHAR(32) NOT NULL COMMENT '资源id',
-  `permission_id` VARCHAR(32) NOT NULL COMMENT '权限id',
-  PRIMARY KEY (resource_id, permission_id)
-) ENGINE=innodb, CHARSET=utf8mb4, COMMENT='资源权限表';
-
 -- 资源角色表(关联表)
 DROP TABLE IF EXISTS resource_role;
 CREATE TABLE resource_role (
