@@ -27,8 +27,7 @@ import java.util.Set;
  * <p>date: 2018-01-21 18:23</p>
  * <p>version: 1.0</p>
  */
-@Aspect
-@Component
+
 @Slf4j
 public class AuthValidAspect {
 

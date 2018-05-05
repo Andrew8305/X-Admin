@@ -20,7 +20,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Swagger2Config {
 
     /**
-     * 访问地址: http://localhost:8080/xadmin/swagger-ui.html
+     * 访问地址: http://localhost:9000/xadmin/swagger-ui.html
      *
      * @return
      */
