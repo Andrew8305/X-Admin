@@ -55,11 +55,6 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    public Set<Permission> queryPermissionsByPath(String path) {
-        return baseMapper.selectResourcePermissionsByPath(path);
-    }
-
-    @Override
     public boolean updateOne(Resource resource) {
         return updateById(resource);
     }
@@ -67,7 +62,6 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     @Override
     public boolean deleteOne(Serializable id) {
         // 删除资源相关依赖
-        baseMapper.deleteResourcePermDeps(id);
         baseMapper.deleteResourceRoleDeps(id);
 
         // TODO　强制系统相关权限刷新

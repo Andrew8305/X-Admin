@@ -69,14 +69,6 @@ public interface IResourceService extends IService<Resource> {
     Set<Role> queryRolesByPath(String path);
 
     /**
-     * 根据路径查询权限信息列表
-     *
-     * @param path
-     * @return
-     */
-    Set<Permission> queryPermissionsByPath(String path);
-
-    /**
      * 更新资源信息
      *
      * @param resource
