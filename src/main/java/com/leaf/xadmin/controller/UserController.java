@@ -44,7 +44,7 @@ public class UserController {
         String loginToken; // 登录凭证
         Subject subject = SecurityUtils.getSubject();
         if (!subject.isAuthenticated()) {
-            ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.USER.getValue());
+            ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.USER);
             subject.login(token);
             subject.getSession().setAttribute(GlobalConstants.SESSION_LOGIN_TYPE_KEY, LoginType.USER.getValue());
             User user = userService.queryOneByName(name);

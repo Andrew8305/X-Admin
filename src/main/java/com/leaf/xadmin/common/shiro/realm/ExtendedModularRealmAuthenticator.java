@@ -1,6 +1,7 @@
 package com.leaf.xadmin.common.shiro.realm;
 
 import com.leaf.xadmin.common.shiro.token.ExtendedUsernamePasswordToken;
+import com.leaf.xadmin.vo.enums.LoginType;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -25,13 +26,13 @@ public class ExtendedModularRealmAuthenticator extends ModularRealmAuthenticator
         // 强制转换回自定义的ExtendedUsernamePasswordToke
         ExtendedUsernamePasswordToken extendedToken = (ExtendedUsernamePasswordToken) authenticationToken;
         // 登录类型
-        String loginType = extendedToken.getLoginType();
+        LoginType loginType = extendedToken.getLoginType();
         // 所有Realm
         Collection<Realm> realms = getRealms();
         // 登录类型对应的所有Realm
         Collection<Realm> typeRealms = new ArrayList<>();
         for (Realm realm : realms) {
-            if (realm.getName().toUpperCase().contains(loginType.toUpperCase())) {
+            if (realm instanceof AbstractCustomRealm && ((AbstractCustomRealm) realm).getLoginType() == loginType) {
                 typeRealms.add(realm);
             }
         }

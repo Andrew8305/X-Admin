@@ -4,6 +4,7 @@ import com.leaf.xadmin.entity.auth.Permission;
 import com.leaf.xadmin.entity.auth.Role;
 import com.leaf.xadmin.entity.front.User;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
+import com.leaf.xadmin.vo.enums.LoginType;
 import com.leaf.xadmin.vo.enums.UserStatus;
 import com.leaf.xadmin.vo.exception.GlobalException;
 import com.leaf.xadmin.service.IPermissionService;
@@ -28,8 +29,7 @@ import java.util.List;
  *
  * @author leaf
  */
-public class UserRealm extends AuthorizingRealm {
-
+public class UserRealm extends AbstractCustomRealm {
     @Autowired
     @Lazy
     private IRoleService roleService;
@@ -39,6 +39,10 @@ public class UserRealm extends AuthorizingRealm {
     @Autowired
     @Lazy
     private IUserService userService;
+
+    public UserRealm() {
+        this.loginType = LoginType.USER;
+    }
 
     /**
      * 授权

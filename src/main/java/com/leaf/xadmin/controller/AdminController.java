@@ -42,7 +42,7 @@ public class AdminController {
     public ResponseResultVO login(@RequestParam("name") String name, @RequestParam("pass") String pass) {
         Subject subject = SecurityUtils.getSubject();
         if (!subject.isAuthenticated()) {
-            ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.ADMIN.getValue());
+            ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.ADMIN);
             subject.login(token);
             // 添加登录类型标识
             subject.getSession().setAttribute(GlobalConstants.SESSION_LOGIN_TYPE_KEY, LoginType.ADMIN.getValue());
