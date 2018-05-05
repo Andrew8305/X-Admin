@@ -2,7 +2,7 @@
 
 # app
 server:
-  port: 8081
+  port: 9000
   context-path: /xadmin
 
 # spring
