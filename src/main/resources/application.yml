@@ -45,6 +45,45 @@ spring:
           starttls:
             enable: true
             required: true
+  # datasource
+  datasource:
+    druid:
+      auth:
+        url: jdbc:mysql://localhost:3306/db_auth?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+      bg:
+        url: jdbc:mysql://localhost:3306/db_bg?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+      front:
+        url: jdbc:mysql://localhost:3306/db_front?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+      qrtz:
+        url: jdbc:mysql://localhost:3306/db_qrtz?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+  # aop
+  aop:
+    auto: true
+    proxy-target-class: true
 # logging
 logging:
   config: classpath:logback/logback.xml

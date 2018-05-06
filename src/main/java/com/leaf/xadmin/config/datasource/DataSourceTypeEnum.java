@@ -11,9 +11,14 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-@Deprecated
 public enum DataSourceTypeEnum {
     // 数据源枚举
-    PRIMARY("primary"), SECOND("second");
-    private String value;
+    FIRST(1, "AUTH", "权限数据库"),
+    SECOND(2, "BG", "后台数据库"),
+    THIRD(3, "FRONT", "前台数据库"),
+    FOUR(4, "QRTZ", "QUARTZ数据库");
+
+    private Integer id;
+    private String name;
+    private String desc;
 }

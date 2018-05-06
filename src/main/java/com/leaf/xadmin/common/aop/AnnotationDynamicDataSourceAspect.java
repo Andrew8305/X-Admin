@@ -23,20 +23,20 @@ import java.lang.reflect.Method;
  * <p>version: 1.0</p>
  */
 @Aspect
-@Order(-1)
+@Order(-100)
 @Component
 @Slf4j
-@Deprecated
 public class AnnotationDynamicDataSourceAspect {
 
     @Pointcut("@annotation(com.leaf.xadmin.common.annotations.TargetDataSource)")
-    public void annotationDynamicDataSourceAspect() { }
+    public void annotationDynamicDataSourceAspect() {}
 
     @Before("annotationDynamicDataSourceAspect()")
     public void changeDataSource(JoinPoint jp) {
         TargetDataSource targetAnnotation = getTargetAnnotation(jp, TargetDataSource.class);
         if (!ObjectUtils.isEmpty(targetAnnotation)) {
-            DataSourceContextHolder.setDataSourceType(targetAnnotation.name().getValue());
+            log.info("切换数据为:" + targetAnnotation.type().getName());
+            DataSourceContextHolder.setDataSourceType(targetAnnotation.type().getName());
         }
     }
 

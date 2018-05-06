@@ -1,6 +1,7 @@
 package com.leaf.xadmin.common.annotations;
 
 import com.leaf.xadmin.config.datasource.DataSourceTypeEnum;
+import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
@@ -14,7 +15,6 @@ import java.lang.annotation.*;
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Deprecated
 public @interface TargetDataSource {
-    DataSourceTypeEnum name();
+    DataSourceTypeEnum type() default DataSourceTypeEnum.SECOND;
 }

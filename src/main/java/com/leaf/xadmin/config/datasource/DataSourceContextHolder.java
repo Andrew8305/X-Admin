@@ -7,7 +7,6 @@ package com.leaf.xadmin.config.datasource;
  * <p>date: 2018-02-28 12:35</p>
  * <p>version: 1.0</p>
  */
-@Deprecated
 public class DataSourceContextHolder {
     private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<>();
 
