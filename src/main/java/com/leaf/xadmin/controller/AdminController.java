@@ -5,7 +5,7 @@ import com.leaf.xadmin.constants.GlobalConstants;
 import com.leaf.xadmin.entity.bg.Admin;
 import com.leaf.xadmin.vo.dto.AdminInfoDTO;
 import com.leaf.xadmin.vo.enums.LoginType;
-import com.leaf.xadmin.service.IAdminService;
+import com.leaf.xadmin.service.bg.IAdminService;
 import com.leaf.xadmin.common.shiro.token.ExtendedUsernamePasswordToken;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;
 import com.leaf.xadmin.vo.ResponseResultVO;

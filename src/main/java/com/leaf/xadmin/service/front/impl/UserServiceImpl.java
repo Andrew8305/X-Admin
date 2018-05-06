@@ -1,13 +1,15 @@
-package com.leaf.xadmin.service.impl;
+package com.leaf.xadmin.service.front.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.leaf.xadmin.common.annotations.TargetDataSource;
+import com.leaf.xadmin.config.datasource.DataSourceTypeEnum;
 import com.leaf.xadmin.entity.front.Account;
 import com.leaf.xadmin.entity.front.User;
 import com.leaf.xadmin.mapper.front.UserMapper;
-import com.leaf.xadmin.service.IAccountService;
-import com.leaf.xadmin.service.IUserService;
+import com.leaf.xadmin.service.front.IAccountService;
+import com.leaf.xadmin.service.front.IUserService;
 import com.leaf.xadmin.utils.encrypt.PassEncryptUtil;
 import com.leaf.xadmin.utils.generator.SnowflakeUtil;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
@@ -74,7 +76,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @CacheEvict(key = "#p0", allEntries = true)
     @Override
     public void logout(String name) {}
-    
+
     @Override
     public User queryOneById(String id) {
         return selectById(id);
@@ -86,6 +88,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return selectOne(new EntityWrapper<User>().eq("name", name));
     }
 
+    @TargetDataSource(type = DataSourceTypeEnum.THIRD)
     @Override
     public Page<User> queryList(Page<User> page) {
         return page.setRecords(selectList(new EntityWrapper<>()));
@@ -93,7 +96,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public Page<User> queryListByType(Page<User> page, Integer type) {
-        return page.setRecords(selectList(new EntityWrapper<User>().eq("type", type)));
+        return page.setRecords(selectList(new EntityWrapper<User>().eq("value", type)));
     }
 
     @Override

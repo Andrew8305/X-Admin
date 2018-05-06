@@ -2,7 +2,7 @@ package com.leaf.xadmin.service.impl;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.leaf.xadmin.entity.front.User;
-import com.leaf.xadmin.service.IUserService;
+import com.leaf.xadmin.service.front.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

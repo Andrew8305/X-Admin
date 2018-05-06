@@ -1,9 +1,8 @@
 package com.leaf.xadmin.common.aop;
 
-import com.leaf.xadmin.entity.auth.Permission;
 import com.leaf.xadmin.entity.auth.Resource;
 import com.leaf.xadmin.entity.auth.Role;
-import com.leaf.xadmin.service.IResourceService;
+import com.leaf.xadmin.service.auth.IResourceService;
 import com.leaf.xadmin.utils.request.RequestMappingResolveUtil;
 import com.leaf.xadmin.vo.RequestResourceVO;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,6 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -95,7 +93,6 @@ public class AuthValidAspect {
         List<RequestResourceVO> requestResourceVOS = requestMappingResolveUtil.methodResolver(currentMethod);
         Resource resource = RequestMappingResolveUtil.pathMergeUpgrade(requestResourceVOS);
         Set<Role> roles = resourceService.queryRolesByPath(resource.getPath());
-        Set<Permission> permissions = resourceService.queryPermissionsByPath(resource.getPath());
         Subject subject = SecurityUtils.getSubject();
 
         // 检查此资源是否允许用户访问
@@ -106,14 +103,7 @@ public class AuthValidAspect {
                 break;
             }
         }
-        if (!allowFlag) {
-            for(Permission permission : permissions) {
-                if (subject.isPermitted(permission.getName())) {
-                    allowFlag = true;
-                    break;
-                }
-            }
-        }
+
         if (!allowFlag) {
             throw new UnauthorizedException();
         }

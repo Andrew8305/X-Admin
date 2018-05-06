@@ -1,7 +1,7 @@
-package com.leaf.xadmin.service.impl;
+package com.leaf.xadmin.service.qrtz.impl;
 
 import com.leaf.xadmin.common.quartz.IBaseJob;
-import com.leaf.xadmin.service.IQuartzService;
+import com.leaf.xadmin.service.qrtz.IQuartzService;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.exception.GlobalException;
 import lombok.extern.slf4j.Slf4j;

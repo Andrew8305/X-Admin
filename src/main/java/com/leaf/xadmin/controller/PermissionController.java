@@ -2,7 +2,7 @@ package com.leaf.xadmin.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.leaf.xadmin.entity.auth.Permission;
-import com.leaf.xadmin.service.IPermissionService;
+import com.leaf.xadmin.service.auth.IPermissionService;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;
 import com.leaf.xadmin.vo.ResponseResultVO;
 import com.leaf.xadmin.vo.form.PermissionSubmitForm;

@@ -1,7 +1,9 @@
-package com.leaf.xadmin.service;
+package com.leaf.xadmin.service.front;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
+import com.leaf.xadmin.common.annotations.TargetDataSource;
+import com.leaf.xadmin.config.datasource.DataSourceTypeEnum;
 import com.leaf.xadmin.entity.front.User;
 
 /**
@@ -11,7 +13,7 @@ import com.leaf.xadmin.entity.front.User;
 public interface IUserService extends IService<User> {
 
     /**
-     * 添加用户(若添加成功返回id)
+     * 添加用户
      *
      * @param user
      * @return
@@ -19,7 +21,7 @@ public interface IUserService extends IService<User> {
     boolean addOne(User user);
 
     /**
-     * 用户登出(清理自定义缓存信息)
+     * 用户登出
      *
      * @param name
      * @return

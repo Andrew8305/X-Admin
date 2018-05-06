@@ -1,9 +1,9 @@
-package com.leaf.xadmin.service.impl;
+package com.leaf.xadmin.service.front.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.front.Account;
 import com.leaf.xadmin.mapper.front.AccountMapper;
-import com.leaf.xadmin.service.IAccountService;
+import com.leaf.xadmin.service.front.IAccountService;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.exception.GlobalException;
 import lombok.extern.slf4j.Slf4j;

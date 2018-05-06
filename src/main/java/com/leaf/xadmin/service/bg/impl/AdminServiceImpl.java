@@ -1,4 +1,4 @@
-package com.leaf.xadmin.service.impl;
+package com.leaf.xadmin.service.bg.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -7,7 +7,7 @@ import com.leaf.xadmin.common.shiro.utils.ShiroHelpUtil;
 import com.leaf.xadmin.constants.GlobalConstants;
 import com.leaf.xadmin.entity.bg.Admin;
 import com.leaf.xadmin.mapper.bg.AdminMapper;
-import com.leaf.xadmin.service.IAdminService;
+import com.leaf.xadmin.service.bg.IAdminService;
 import com.leaf.xadmin.utils.encrypt.PassEncryptUtil;
 import com.leaf.xadmin.utils.generator.SnowflakeUtil;
 import com.leaf.xadmin.vo.enums.ErrorStatus;
@@ -48,7 +48,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Override
     public Page<Admin> queryListByType(Page<Admin> page, Integer type) {
-        return page.setRecords(selectList(new EntityWrapper<Admin>().eq("type", type)));
+        return page.setRecords(selectList(new EntityWrapper<Admin>().eq("value", type)));
     }
 
     @Override

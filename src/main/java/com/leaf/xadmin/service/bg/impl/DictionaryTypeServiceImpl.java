@@ -1,11 +1,11 @@
-package com.leaf.xadmin.service.impl;
+package com.leaf.xadmin.service.bg.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.leaf.xadmin.entity.bg.DictionaryType;
 import com.leaf.xadmin.mapper.bg.DictTypeMapper;
-import com.leaf.xadmin.service.IDictionaryTypeService;
+import com.leaf.xadmin.service.bg.IDictionaryTypeService;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;

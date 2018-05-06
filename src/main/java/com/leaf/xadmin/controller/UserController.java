@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.leaf.xadmin.common.shiro.token.ExtendedUsernamePasswordToken;
 import com.leaf.xadmin.constants.GlobalConstants;
 import com.leaf.xadmin.entity.front.User;
-import com.leaf.xadmin.service.IUserService;
+import com.leaf.xadmin.service.front.IUserService;
 import com.leaf.xadmin.utils.jwt.JwtUtil;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;
 import com.leaf.xadmin.vo.ResponseResultVO;

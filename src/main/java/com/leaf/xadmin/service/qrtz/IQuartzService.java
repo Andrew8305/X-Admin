@@ -1,4 +1,4 @@
-package com.leaf.xadmin.service;
+package com.leaf.xadmin.service.qrtz;
 
 /**
  * @author leaf

@@ -1,7 +1,7 @@
-package com.leaf.xadmin.service.impl;
+package com.leaf.xadmin.service.other.impl;
 
 import com.leaf.xadmin.vo.enums.ErrorStatus;
-import com.leaf.xadmin.service.IMailService;
+import com.leaf.xadmin.service.other.IMailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

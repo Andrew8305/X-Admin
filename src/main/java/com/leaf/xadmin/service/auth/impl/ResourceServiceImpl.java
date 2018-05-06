@@ -1,13 +1,12 @@
-package com.leaf.xadmin.service.impl;
+package com.leaf.xadmin.service.auth.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.leaf.xadmin.entity.auth.Permission;
 import com.leaf.xadmin.entity.auth.Resource;
 import com.leaf.xadmin.entity.auth.Role;
 import com.leaf.xadmin.mapper.auth.ResourceMapper;
-import com.leaf.xadmin.service.IResourceService;
+import com.leaf.xadmin.service.auth.IResourceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.leaf.xadmin.service;
+package com.leaf.xadmin.service.bg;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
