@@ -23,13 +23,13 @@ public class UserServiceImplTest {
     private IUserService userService;
 
     @Test
-    public void queryUser() throws Exception {
+    public void queryUser() {
         User user = userService.queryOneByName("leaf");
         log.info(user.toString());
     }
 
     @Test
-    public void queryList() throws Exception {
+    public void queryList() {
         Page<User> page = new Page<>(1, 3);
         page = userService.queryList(page);
         log.info("分页信息:{}" + page);
