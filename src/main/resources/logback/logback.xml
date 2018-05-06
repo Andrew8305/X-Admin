@@ -41,17 +41,17 @@
     </appender>
 
     <!-- (TRACE, DEBUG, INFO, WARN, ERROR, ALL和OFF, 但不可设置INHERITED或者同义词NULL) -->
-    <root level="DEBUG">
-        <appender-ref ref="CONSOLE"/>
+    <!--<root level="DEBUG">-->
+        <!--<appender-ref ref="CONSOLE"/>-->
         <!--<appender-ref ref="FILE"/>-->
-    </root>
+    <!--</root>-->
 
     <!-- 测试、环境 -->
-    <!--<springProfile value="test, dev">-->
-        <!--<logger value="${log.package.value}" level="DEBUG">-->
-            <!--<appender-ref ref="CONSOLE" />-->
-        <!--</logger>-->
-    <!--</springProfile>-->
+    <springProfile value="test, dev">
+        <logger value="${log.package.value}" level="DEBUG">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+    </springProfile>
 
     <!-- 生产环境 -->
     <!--<springProfile value="prod">-->
