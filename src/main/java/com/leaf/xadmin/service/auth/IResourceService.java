@@ -27,6 +27,14 @@ public interface IResourceService extends IService<Resource> {
     boolean addBatch(List<Resource> resourceList);
 
     /**
+     * 添加单个资源
+     *
+     * @param resource
+     * @return
+     */
+    boolean addOne(Resource resource);
+
+    /**
      * 批量添加或更新资源记录列表
      *
      * @param resourceList
