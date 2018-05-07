@@ -1,4 +1,4 @@
-package com.leaf.xadmin.service.impl;
+package com.leaf.xadmin.service.front.impl;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.leaf.xadmin.entity.front.User;

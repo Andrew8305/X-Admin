@@ -1,4 +1,4 @@
-package com.leaf.xadmin.service.impl;
+package com.leaf.xadmin.service.qrtz.impl;
 
 import com.leaf.xadmin.entity.qrtz.QrtzTriggers;
 import com.leaf.xadmin.service.qrtz.IQrtzTriggersService;

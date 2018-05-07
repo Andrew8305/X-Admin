@@ -29,6 +29,11 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
+    public boolean addOne(Resource resource) {
+        return insert(resource);
+    }
+
+    @Override
     public boolean addOrUpdateBatch(List<Resource> resourceList) {
         return insertOrUpdateBatch(resourceList);
     }
