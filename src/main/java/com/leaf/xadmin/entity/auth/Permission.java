@@ -1,7 +1,10 @@
 package com.leaf.xadmin.entity.auth;
 
 import com.baomidou.mybatisplus.annotations.TableLogic;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
@@ -16,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class Permission {
-    private String id;
+    private Long id;
     private String name;
     private String desc;
     private Integer type;

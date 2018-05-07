@@ -19,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class Notice {
-    private String id;
+    private Long id;
     private String name;
     private String desc;
     private Integer type;

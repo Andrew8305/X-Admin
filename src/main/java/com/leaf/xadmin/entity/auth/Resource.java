@@ -20,7 +20,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class Resource {
-    private String id;
+    private Long id;
     private String parentId;
     private String name;
     private String desc;

@@ -20,7 +20,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class DictionaryType {
-    private String id;
+    private Long id;
     private Integer code;
     private String name;
     private String desc;
