@@ -1,16 +1,11 @@
 package com.leaf.xadmin.controller;
 
-import com.leaf.xadmin.constants.GlobalConstants;
-import com.leaf.xadmin.vo.enums.ErrorStatus;
-import com.leaf.xadmin.vo.exception.GlobalException;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;
 import com.leaf.xadmin.utils.verify.VerifyPictureUtil;
 import com.leaf.xadmin.vo.ResponseResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +22,7 @@ import java.util.Map;
 @CrossOrigin
 @Slf4j
 public class VerifyController {
+    private static final ThreadLocal<String> VERIFY_CODE_THREAD_LOCAL = new ThreadLocal<>();
 
     @Autowired
     private VerifyPictureUtil verifyPictureUtil;
@@ -36,13 +32,9 @@ public class VerifyController {
     public ResponseResultVO generate() {
         // 绘制验证图片
         Map<String, Object> resultMap = verifyPictureUtil.draw();
-
-        // 存储验证码至session中
-        Session session = SecurityUtils.getSubject().getSession(Boolean.FALSE);
-        if (session == null) {
-            throw new GlobalException(ErrorStatus.VERIFY_PICTURE_ERROR);
-        } else {
-            session.setAttribute(GlobalConstants.SESSION_VERIFY_PICTURE_KEY, resultMap.get(VerifyPictureUtil.VERIFY_CODE_VALUE));
+        String code = (String) resultMap.get(VerifyPictureUtil.VERIFY_CODE_VALUE);
+        if (code != null && !code.isEmpty()) {
+            VERIFY_CODE_THREAD_LOCAL.set(code);
         }
 
         // 返回Base64编码请求
@@ -52,15 +44,11 @@ public class VerifyController {
     @ApiOperation(value = "校验验证码合法性")
     @PostMapping(value = "valid")
     public ResponseResultVO valid(@RequestParam("code") String code) {
-        Session session = SecurityUtils.getSubject().getSession(Boolean.FALSE);
-        if (session == null) {
-            return ResponseResultUtil.fail(Boolean.FALSE);
-        } else {
-            String attribute = (String) session.getAttribute(GlobalConstants.SESSION_VERIFY_PICTURE_KEY);
-            if (!attribute.isEmpty() && attribute.equalsIgnoreCase(code)) {
-                return ResponseResultUtil.fail(Boolean.TRUE);
-            }
-            return ResponseResultUtil.fail(Boolean.FALSE);
+        String attribute = VERIFY_CODE_THREAD_LOCAL.get();
+        if (attribute != null && !attribute.isEmpty() && attribute.equalsIgnoreCase(code)) {
+            VERIFY_CODE_THREAD_LOCAL.remove();
+            return ResponseResultUtil.success(Boolean.TRUE);
         }
+        return ResponseResultUtil.fail(Boolean.FALSE);
     }
 }

@@ -27,9 +27,21 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             if (selectOne != null) {
                 throw new GlobalException(ErrorStatus.ACCOUNT_EXIST_ERROR);
             }
+            // 初始化账户
+            account = preAccountInit(account);
             return insert(account);
         }
         return false;
+    }
+
+
+    /**
+     * 账户初始化
+     */
+    private Account preAccountInit(Account account) {
+        log.debug("用户" + account.getNickname() + "账户初始化!");
+        // TODO 待完善账户其他基本信息
+        return account;
     }
 
 }

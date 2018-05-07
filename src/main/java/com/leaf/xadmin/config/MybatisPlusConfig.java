@@ -85,8 +85,7 @@ public class MybatisPlusConfig {
 
     @Bean
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {
-        OptimisticLockerInterceptor optimisticLockerInterceptor = new OptimisticLockerInterceptor();
-        return optimisticLockerInterceptor;
+        return new OptimisticLockerInterceptor();
     }
 
     @Bean

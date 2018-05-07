@@ -8,7 +8,9 @@ import com.leaf.xadmin.service.front.IUserService;
 import com.leaf.xadmin.utils.jwt.JwtUtil;
 import com.leaf.xadmin.utils.response.ResponseResultUtil;
 import com.leaf.xadmin.vo.ResponseResultVO;
+import com.leaf.xadmin.vo.enums.ErrorStatus;
 import com.leaf.xadmin.vo.enums.LoginType;
+import com.leaf.xadmin.vo.exception.GlobalException;
 import com.leaf.xadmin.vo.form.UserRegisterForm;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,11 +49,14 @@ public class UserController {
             ExtendedUsernamePasswordToken token = new ExtendedUsernamePasswordToken(name, pass, LoginType.USER);
             subject.login(token);
             subject.getSession().setAttribute(GlobalConstants.SESSION_LOGIN_TYPE_KEY, LoginType.USER.getValue());
-            User user = userService.queryOneByName(name);
-            loginToken = JwtUtil.generateToken(user.getId(), name, user.getPass());
-            // token写入cookie
-            response.addCookie(new Cookie("token", loginToken));
-            return ResponseResultUtil.success(loginToken);
+            User user = userService.login(name);
+            if (user != null) {
+                loginToken = JwtUtil.generateToken(user.getId(), name, user.getPass());
+                // token写入cookie
+                response.addCookie(new Cookie("token", loginToken));
+                return ResponseResultUtil.success(loginToken);
+            }
+            throw new GlobalException(ErrorStatus.LOGIN_FAIL_ERROR);
         } else {
             logout();
             return login(name, pass, response);
@@ -73,7 +78,7 @@ public class UserController {
     public ResponseResultVO register(@Valid UserRegisterForm userRegisterForm) {
         User user = User.builder().build();
         BeanUtils.copyProperties(userRegisterForm, user);
-        return ResponseResultUtil.success(userService.addOne(user));
+        return ResponseResultUtil.success(userService.register(user));
     }
 
     @ApiOperation(value = "获取指定id用户信息")
@@ -83,8 +88,8 @@ public class UserController {
     }
 
     @ApiOperation(value = "获取指定用户名信息")
-    @GetMapping(value = "getUser/{name}")
-    public ResponseResultVO getUserByName(@PathVariable("name") String name) {
+    @GetMapping(value = "getUser")
+    public ResponseResultVO getUserByName(@RequestParam("name") String name) {
         return ResponseResultUtil.success(userService.queryOneByName(name));
     }
 

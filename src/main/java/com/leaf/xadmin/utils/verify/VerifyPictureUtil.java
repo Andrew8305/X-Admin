@@ -57,7 +57,7 @@ public class VerifyPictureUtil {
 			g.drawLine(x, y, x + xl, y + yl);
 		}
 		// 取随机产生的认证码(4位数字)
-		StringBuffer sRand = new StringBuffer();
+		StringBuilder sRand = new StringBuilder();
 		for (int i = 0; i < codeNum; i++) {
 			String rand = String.valueOf(random.nextInt(10));
 			sRand.append(rand);
@@ -69,7 +69,7 @@ public class VerifyPictureUtil {
 		// 返回封装结果
 		Map<String, Object> map = new HashMap<>(2);
 		map.put(VERIFY_ENCODE_RESULT, encodeImage(image));
-		map.put(VERIFY_CODE_VALUE, sRand);
+		map.put(VERIFY_CODE_VALUE, sRand.toString());
 		return map;
 	}
 

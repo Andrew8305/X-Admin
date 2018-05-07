@@ -3,8 +3,6 @@ package com.leaf.xadmin.service.front.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.leaf.xadmin.common.annotations.TargetDataSource;
-import com.leaf.xadmin.config.datasource.DataSourceTypeEnum;
 import com.leaf.xadmin.entity.front.Account;
 import com.leaf.xadmin.entity.front.User;
 import com.leaf.xadmin.mapper.front.UserMapper;
@@ -23,6 +21,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -41,7 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private IAccountService accountService;
 
     @Override
-    public boolean addOne(User user) {
+    public boolean register(User user) {
         Random random = new Random();
         SnowflakeUtil idWorker = new SnowflakeUtil(random.nextInt(31), random.nextInt(31));
 
@@ -56,7 +55,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             passEncryptUtil.setSecretKey(LoginType.USER.getValue() + user.getName());
             user.setId(id);
             user.setPass(passEncryptUtil.encryptPass(user.getPass()));
-            if (insert(user)) {
+            if (addOne(user)) {
                 Account account = Account.builder()
                         .id(id)
                         .email(user.getEmail())
@@ -73,22 +72,39 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     }
 
+    @Cacheable(key = "#p0")
+    @Override
+    public User login(String name) {
+        User u = selectOne(new EntityWrapper<User>().eq("name", name));
+        if (u != null) {
+            preLogin(name);
+            return u;
+        }
+
+        return null;
+    }
+
     @CacheEvict(key = "#p0", allEntries = true)
     @Override
-    public void logout(String name) {}
+    public void logout(String name) {
+        preLogout(name);
+    }
 
     @Override
-    public User queryOneById(String id) {
+    public boolean addOne(User user) {
+        return insert(user);
+    }
+
+    @Override
+    public User queryOneById(Serializable id) {
         return selectById(id);
     }
 
-    @Cacheable(key = "#p0")
     @Override
     public User queryOneByName(String name) {
         return selectOne(new EntityWrapper<User>().eq("name", name));
     }
 
-    @TargetDataSource(type = DataSourceTypeEnum.THIRD)
     @Override
     public Page<User> queryList(Page<User> page) {
         return page.setRecords(selectList(new EntityWrapper<>()));
@@ -102,5 +118,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public Page<User> queryListByStatus(Page<User> page, Integer status) {
         return page.setRecords(selectList(new EntityWrapper<User>().eq("status", status)));
+    }
+
+    /**
+     * 预登录操作
+     *
+     * @param name
+     */
+    private void preLogin(String name) {
+        log.debug("用户" + name + "进行预登录!");
+        // TODO 预登录操作
+    }
+
+    /**
+     * 预登出操作
+     *
+     * @param name
+     */
+    private void preLogout(String name) {
+        log.debug("用户" + name + "进行预登出!");
+        // TODO 预登出操作
     }
 }
