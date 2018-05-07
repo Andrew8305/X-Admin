@@ -50,7 +50,7 @@ CREATE TABLE account(
 -- 附件表
 DROP TABLE IF EXISTS attachment;
 CREATE TABLE attachment(
-  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+  `id` VARCHAR(32) PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(32) NOT NULL COMMENT '附件名(新名称)',
   `old_name` VARCHAR(32) NOT NULL COMMENT '原始名',
   `name_postfix` VARCHAR(16) COMMENT '后缀名',
