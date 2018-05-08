@@ -112,7 +112,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public Page<User> queryListByType(Page<User> page, Integer type) {
-        return page.setRecords(selectList(new EntityWrapper<User>().eq("value", type)));
+        return page.setRecords(selectList(new EntityWrapper<User>().eq("type", type)));
     }
 
     @Override
